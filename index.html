@@ -106,6 +106,7 @@
       { num: 3, title: "Jetpack Compose", desc: "INF2007 – Mobile Application Development • Lecture 3", file: "lecture_3_quiz.html", notes: "notes/lec3.md" },
       { num: 4, title: "State Management & Navigation", desc: "INF2007 – Mobile Application Development • Lecture 4", file: "lecture_4_quiz.html", notes: "notes/lec4.md" },
       { num: 5, title: "Navigation & ViewModel", desc: "INF2007 – Mobile Application Development • Lecture 5", file: "lecture_5_quiz.html", notes: "notes/lec5.md" },
+      { num: 6, title: "Code Blocks Quiz", desc: "INF2007 – Mobile Application Development • Practice Quiz with Code Examples", file: "code_blocks_quiz.html" },
     ];
 
     // --- Render Quiz Cards ---
@@ -119,7 +120,7 @@
         card.innerHTML = `
           <div>
             <h3>${quiz.title}</h3>
-            <div class="tag">Lecture ${quiz.num}</div>
+            <div class="tag">${quiz.num <= 5 ? 'Lecture ' + quiz.num : 'Practice Quiz'}</div>
           </div>
           <p style="margin:0;color:#9ca3af;font-size:14px">${quiz.desc}</p>
           <div class="btns">

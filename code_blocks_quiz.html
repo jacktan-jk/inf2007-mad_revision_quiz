@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF2007 – Code Blocks MCQ Quiz</title>
+  <style>
+    :root { --maxw: 980px; --accent: #0f766e; --muted:#6b7280; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Noto Sans", sans-serif; line-height: 1.45; margin: 0; background: #f7f7f8;
+    color:#111827; }
+    header { background: white; border-bottom: 1px solid #e5e7eb; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 18px 16px; }
+    h1 { font-size: clamp(20px, 2.6vw, 28px); margin: 0 0 6px; }
+    .sub { color: var(--muted); font-size: 14px; }
+    .controls { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px }
+    button { cursor:pointer; border:1px solid #e5e7eb; background:white;
+    padding:8px 12px; border-radius:10px; font-weight:600; }
+    button.primary { background: var(--accent); color: white; border-color:
+    var(--accent); }
+    button:disabled { opacity:.6; cursor:not-allowed }
+    .stats { display:flex; gap:18px; align-items:center; margin-top:10px; }
+    .pill { background:#eef2ff; color:#3730a3; font-weight:700; padding:6px
+    10px; border-radius:999px; }
+    main { max-width: var(--maxw); margin: 12px auto 60px; padding: 0 16px; }
+    .qcard { background:white; border:1px solid #e5e7eb; border-radius:14px;
+    padding:14px; margin:14px 0; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+    .qhead { display:flex; justify-content:space-between; align-items:baseline;
+    gap:6px }
+    .qtitle { font-weight:700; margin:0 0 8px }
+    .badge { font-size:12px; color:#374151; background:#f3f4f6; border:1px
+    solid #e5e7eb; padding:2px 8px; border-radius:999px }
+    .opts { display:grid; gap:8px; margin-top:8px }
+    .opt { display:flex; gap:10px; align-items:flex-start; padding:10px;
+    border:1px solid #e5e7eb; border-radius:12px; background:white; cursor:pointer; }
+    .opt:hover { border-color:#c7d2fe; }
+    .opt.correct { border-color:#16a34a; background:#f0fdf4; }
+    .opt.wrong { border-color:#dc2626; background:#fef2f2; }
+    .opt.disabled { pointer-events:none; opacity:.8 }
+    .letter { width:28px; height:28px; border-radius:999px; border:1px
+    solid #e5e7eb; display:grid; place-items:center; font-weight:700; }
+    .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
+    color:#111827; }
+    .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
+    footer { text-align:center; color:#6b7280; padding:30px 12px; }
+    details > summary { cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>INF2007 – Code Blocks MCQ Quiz</h1>
+      <div class="sub">INF2007 – Mobile Application Development • Code practice</div>
+      <div class="stats" id="stats">
+        <span class="pill" id="score">Score: 0</span>
+        <span class="pill" id="progress">Answered: 0 / 0</span>
+        <span class="pill" id="percent">0%</span>
+      </div>
+      <div class="controls">
+        <button class="primary" id="resetBtn" title="Reset the quiz to try again">Reset quiz</button>
+        <button id="revealBtn" title="Reveal correct answers for all questions">Reveal all answers</button>
+        <button id="shuffleBtn" title="Shuffle questions and answer options">Shuffle</button>
+      </div>
+    </div>
+  </header>
+  <main id="quiz"></main>
+  <footer>
+    Based on lecture material. This educational quiz is for practice.
+  </footer>
+  <script>
+    const QUESTIONS = [
+  {
+    "q": "<pre class=\"code-block\">fun main() {\n    var x = 10\n    x += 5\n    val y = x\n    println(y)\n}</pre>\nWhat is printed by this Kotlin program?",
+    "options": [
+      "10",
+      "15",
+      "5",
+      "Compilation error"
+    ],
+    "correct": 1,
+    "why": "Using var allows reassignment, and val y holds the final value of x (15) which is printed【987723225263861†L24-L31】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun safeLength(str: String?): Int {\n    return str?.length ?: 0\n}\nfun main() {\n    val name: String? = null\n    println(safeLength(name))\n}</pre>\nWhat is printed when this code runs?",
+    "options": [
+      "0",
+      "null",
+      "Compilation error",
+      "Throws NullPointerException"
+    ],
+    "correct": 0,
+    "why": "The safe call (?.) returns null and the Elvis operator returns 0 when null, so 0 is printed【987723225263861†L44-L54】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun evaluate(n: Int): String {\n    return when (n) {\n        1 -> \"One\"\n        2 -> \"Two\"\n        else -> \"Other\"\n    }\n}\nfun main() {\n    println(evaluate(2))\n}</pre>\nWhat does this program print?",
+    "options": [
+      "One",
+      "Two",
+      "Other",
+      "Compilation error"
+    ],
+    "correct": 1,
+    "why": "The when expression returns \"Two\" when the input is 2【987723225263861†L79-L86】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun main() {\n    val sum: (Int, Int) -> Int = { a, b -> a + b }\n    println(sum(3, 4))\n}</pre>\nWhat is printed by this code?",
+    "options": [
+      "7",
+      "3",
+      "4",
+      "Compilation error"
+    ],
+    "correct": 0,
+    "why": "A lambda expression sums its two arguments; sum(3, 4) is 7【987723225263861†L139-L150】."
+  },
+  {
+    "q": "<pre class=\"code-block\">class BankAccount(private var balance: Int) {\n    fun deposit(amount: Int) {\n        balance += amount\n    }\n    fun getBalance(): Int = balance\n}\nfun main() {\n    val account = BankAccount(100)\n    account.deposit(50)\n    println(account.getBalance())\n}</pre>\nWhat value is printed?",
+    "options": [
+      "100",
+      "50",
+      "150",
+      "Compilation error"
+    ],
+    "correct": 2,
+    "why": "deposit() updates the private balance property and getBalance() returns it. 100 + 50 = 150【987723225263861†L123-L130】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun main() {\n    val text: String? = \"Compose\"\n    text?.let {\n        println(it.uppercase())\n    }\n}</pre>\nWhat is printed by this program?",
+    "options": [
+      "compose",
+      "COMPOSE",
+      "null",
+      "Nothing is printed"
+    ],
+    "correct": 1,
+    "why": "let executes only when the receiver is non-null; it prints the uppercase version of the string【987723225263861†L152-L166】."
+  },
+  {
+    "q": "<pre class=\"code-block\">val intent = Intent(this, ProfileActivity::class.java)\nstartActivity(intent)</pre>\nWhat does this code do in an Android Activity?",
+    "options": [
+      "It starts ProfileActivity",
+      "It sends a broadcast",
+      "It binds a service",
+      "It registers a ContentProvider"
+    ],
+    "correct": 0,
+    "why": "An explicit Intent with a context and target class launches the ProfileActivity when passed to startActivity()【594818497736741†L103-L116】."
+  },
+  {
+    "q": "<pre class=\"code-block\">val intentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)\nval receiver = object : BroadcastReceiver() {\n    override fun onReceive(context: Context, intent: Intent?) {\n        println(\"Airplane mode changed\")\n    }\n}\nregisterReceiver(receiver, intentFilter)</pre>\nWhich component listens for the airplane mode change?",
+    "options": [
+      "Activity",
+      "Service",
+      "BroadcastReceiver",
+      "ContentProvider"
+    ],
+    "correct": 2,
+    "why": "The code creates an anonymous BroadcastReceiver to handle the AIRPLANE_MODE_CHANGED broadcast【594818497736741†L191-L198】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun marking(homework: String, compute: () -> Int) {\n    println(\"$homework result:\")\n    val result = compute()\n    println(if (result >= 50) \"You pass!\" else \"You fail!\")\n}\nfun main() {\n    marking(\"Lab 1\") {\n        val q1 = 4\n        val q2 = 1\n        (q1 + q2) * 10 // Return value implicitly\n    }\n}</pre>\nWhat does this program output?",
+    "options": [
+      "error",
+      "Lab 1 result:\nYou fail!",
+      "Lab 1 result:\nYou pass!",
+      "You pass!"
+    ],
+    "correct": 2,
+    "why": "(4+1)*10 = 50 so the conditional prints \"You pass!\" after \"Lab 1 result:\"【987723225263861†L139-L150】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun Greeting(name: String) {\n    Text(\"Hello $name\")\n}</pre>\nIs Greeting() a composable function?",
+    "options": [
+      "Yes",
+      "No",
+      "Maybe",
+      "Only if called inside @Composable"
+    ],
+    "correct": 1,
+    "why": "A function must be annotated with @Composable to be treated as a composable; Greeting lacks that annotation【543652055253700†L106-L111】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun CounterExample() {\n    var count = 0\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nWhat happens when the user clicks the button?",
+    "options": [
+      "Count increments and displays increasing numbers",
+      "Count never changes because the variable is not remembered",
+      "App crashes",
+      "Button becomes disabled"
+    ],
+    "correct": 1,
+    "why": "Without remember, count is a local variable that resets on every recomposition; clicking triggers recomposition so the displayed value remains 0【543652055253700†L279-L282】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun CounterExample2() {\n    var count by remember { mutableStateOf(0) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nAfter pressing the button three times, what text is shown?",
+    "options": [
+      "Count: 3",
+      "Count: 0",
+      "Count: 1",
+      "The app crashes"
+    ],
+    "correct": 0,
+    "why": "remember with mutableStateOf stores the state across recompositions; each click increments the counter so after three clicks it displays 3【543652055253700†L279-L282】."
+  },
+  {
+    "q": "<pre class=\"code-block\">Box(\n    modifier = Modifier.size(100.dp).size(200.dp)\n) {\n    Text(\"Hello\")\n}</pre>\nWhat is the final size of the Box?",
+    "options": [
+      "100 dp",
+      "200 dp",
+      "300 dp",
+      "It has zero size"
+    ],
+    "correct": 1,
+    "why": "When chaining size modifiers, the last one wins; the Box ends up sized at 200 dp【543652055253700†L229-L236】."
+  },
+  {
+    "q": "<pre class=\"code-block\">Scaffold(\n    topBar = { TopAppBar(title = { Text(\"App\") }) },\n    floatingActionButton = { FloatingActionButton(onClick = {}) { Text(\"FAB\") } }\n) { innerPadding ->\n    Text(\"Content\", modifier = Modifier.padding(innerPadding))\n}</pre>\nWhich slot places the floating action button?",
+    "options": [
+      "topBar",
+      "floatingActionButton",
+      "content",
+      "drawerContent"
+    ],
+    "correct": 1,
+    "why": "Scaffold provides specific slots like topBar, bottomBar and floatingActionButton; the FAB is provided via the floatingActionButton slot【543652055253700†L178-L190】."
+  },
+  {
+    "q": "<pre class=\"code-block\">navController.navigate(\"profile\")\nnavController.navigate(\"settings\")\nnavController.popBackStack()</pre>\nAfter executing these calls, where does the user end up?",
+    "options": [
+      "Still on Settings",
+      "Back on Profile",
+      "On the Home screen",
+      "The entire stack is cleared"
+    ],
+    "correct": 1,
+    "why": "popBackStack() without parameters removes the top destination (settings) and returns to the previous destination (profile)【142401871453801†L14-L26】."
+  },
+  {
+    "q": "<pre class=\"code-block\">class CounterViewModel : ViewModel() {\n    var count by mutableStateOf(0)\n}</pre>\nWhich statement about this ViewModel is true?",
+    "options": [
+      "The count persists across configuration changes",
+      "The count resets on every recomposition",
+      "ViewModel holds no state",
+      "mutableStateOf is unnecessary"
+    ],
+    "correct": 0,
+    "why": "A ViewModel survives configuration changes; the mutableStateOf value persists as long as the ViewModel exists【285262186379052†L147-L155】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun RememberDemo() {\n    var text by remember { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nWhat happens to the text when the device rotates?",
+    "options": [
+      "The text resets to empty",
+      "The text persists",
+      "The app crashes",
+      "The text duplicates"
+    ],
+    "correct": 0,
+    "why": "remember does not persist state across configuration changes; the value resets on rotation【285262186379052†L124-L130】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun RememberSaveableDemo() {\n    var text by rememberSaveable { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nHow does this behave across a device rotation?",
+    "options": [
+      "The text is lost",
+      "The text persists",
+      "An exception is thrown",
+      "The state is saved only if text is numeric"
+    ],
+    "correct": 1,
+    "why": "rememberSaveable persists the state using SavedInstanceState; after rotation the text remains【285262186379052†L124-L130】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun ToggleExample() {\n    var enabled by remember { mutableStateOf(true) }\n    Switch(checked = enabled, onCheckedChange = { enabled = it })\n}</pre>\nWhat happens when the user toggles the switch?",
+    "options": [
+      "The enabled value updates and the UI reflects the change",
+      "Nothing happens",
+      "The switch toggles but state is not remembered",
+      "The app crashes"
+    ],
+    "correct": 0,
+    "why": "Switch updates the mutableStateOf value and triggers recomposition; the UI shows the new state【142401871453801†L146-L179】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun StatelessToggle(enabled: Boolean, onToggle: (Boolean) -> Unit) {\n    Switch(checked = enabled, onCheckedChange = onToggle)\n}\n@Composable\nfun Parent() {\n    var enabled by remember { mutableStateOf(false) }\n    StatelessToggle(enabled = enabled, onToggle = { enabled = it })\n}</pre>\nWhat pattern does this illustrate?",
+    "options": [
+      "State hoisting",
+      "Two‑way data binding",
+      "Stateful composable",
+      "Global mutable state"
+    ],
+    "correct": 0,
+    "why": "Moving state to the parent composable and passing it down with callbacks is an example of state hoisting【543652055253700†L286-L296】."
+  }
+];
+    // --- Quiz Logic (DO NOT MODIFY) ---
+    const quizEl = document.getElementById('quiz');
+    const scoreEl = document.getElementById('score');
+    const progressEl = document.getElementById('progress');
+    const percentEl = document.getElementById('percent');
+    const resetBtn = document.getElementById('resetBtn');
+    const revealBtn = document.getElementById('revealBtn');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    let state = { score: 0, answered: 0 };
+    let currentQuestions = [];
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    function buildQuestions() {
+      return shuffle(QUESTIONS).map(q => (({
+        q: q.q,
+        options: shuffle(q.options.map((txt, i) => ({ txt, isCorrect: i === q.correct }))),
+        correct: 0,
+        why: q.why,
+        __answered: false
+      }))).map(item => {
+        item.correct = item.options.findIndex(o => o.isCorrect);
+        item.options = item.options.map(o => o.txt);
+        return item;
+      });
+    }
+    function render() {
+      quizEl.innerHTML = '';
+      currentQuestions.forEach((item, qi) => {
+        const card = document.createElement('div');
+        card.className = 'qcard';
+        const head = document.createElement('div');
+        head.className = 'qhead';
+        const titleEl = document.createElement('p');
+        titleEl.className = 'qtitle';
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = `Q${qi + 1}`;
+        head.appendChild(titleEl);
+        head.appendChild(badge);
+        card.appendChild(head);
+        const opts = document.createElement('div');
+        opts.className = 'opts';
+        item.options.forEach((opt, oi) => {
+          const row = document.createElement('div');
+          row.className = 'opt';
+          row.setAttribute('data-q', qi);
+          row.setAttribute('data-o', oi);
+          const letter = document.createElement('div');
+          letter.className = 'letter';
+          letter.textContent = String.fromCharCode(65 + oi);
+          const span = document.createElement('span');
+          span.innerHTML = opt;
+          row.appendChild(letter);
+          row.appendChild(span);
+          row.addEventListener('click', onChoose);
+          opts.appendChild(row);
+        });
+        const exp = document.createElement('div');
+        exp.className = 'exp';
+        exp.hidden = true;
+        exp.innerHTML = `<strong>Explanation:</strong> ${item.why}`;
+        card.appendChild(opts);
+        card.appendChild(exp);
+        quizEl.appendChild(card);
+      });
+      updateStats();
+    }
+    function onChoose(e) {
+      const btn = e.currentTarget;
+      const qIndex = +btn.getAttribute('data-q');
+      const oIndex = +btn.getAttribute('data-o');
+      const card = btn.closest('.qcard');
+      const exp = card.querySelector('.exp');
+      const data = currentQuestions[qIndex];
+      if (data.__answered) return;
+      const options = card.querySelectorAll('.opt');
+      options.forEach(b => b.classList.add('disabled'));
+      data.__answered = true;
+      state.answered++;
+      if (oIndex === data.correct) {
+        btn.classList.add('correct');
+        state.score++;
+      } else {
+        btn.classList.add('wrong');
+        options[data.correct].classList.add('correct');
+      }
+      exp.hidden = false;
+      updateStats();
+    }
+    function updateStats() {
+      scoreEl.textContent = `Score: ${state.score}`;
+      progressEl.textContent = `Answered: ${state.answered} / ${currentQuestions.length}`;
+      const pct = currentQuestions.length ? Math.round((state.score/currentQuestions.length)*100) : 0;
+      percentEl.textContent = `${pct}%`;
+    }
+    function revealAll() {
+      document.querySelectorAll('.qcard').forEach((card, qi) => {
+        const data = currentQuestions[qi];
+        const exp = card.querySelector('.exp');
+        const options = card.querySelectorAll('.opt');
+        options.forEach((b, oi) => {
+          b.classList.remove('wrong');
+          if (oi === data.correct) b.classList.add('correct');
+          b.classList.add('disabled');
+        });
+        data.__answered = true;
+        exp.hidden = false;
+      });
+    }
+    function resetQuiz() {
+      state.score = 0; state.answered = 0;
+      render();
+    }
+    function shuffleQuiz() {
+      state.score = 0; state.answered = 0;
+      currentQuestions = buildQuestions();
+      render();
+    }
+    resetBtn.addEventListener('click', resetQuiz);
+    revealBtn.addEventListener('click', revealAll);
+    shuffleBtn.addEventListener('click', shuffleQuiz);
+    currentQuestions = buildQuestions();
+    render();
+  </script>
+</body>
+</html>
