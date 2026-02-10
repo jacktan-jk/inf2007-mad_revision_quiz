@@ -88,7 +88,7 @@
       "There is no difference"
     ],
     "correct": 0,
-    "why": "The slides define stateful composables as those that hold state internally, whereas stateless composables rely on their callers to manage state【543652055253700†L286-L296】."
+    "why": "The slides define stateful composables as those that hold state internally, whereas stateless composables rely on their callers to manage state."
   },
   {
     "q": "What is state hoisting?",
@@ -99,7 +99,7 @@
       "Caching a value for reuse"
     ],
     "correct": 0,
-    "why": "State hoisting involves moving state up to the parent so that the child composable becomes stateless and reusable【543652055253700†L286-L296】."
+    "why": "State hoisting involves moving state up to the parent so that the child composable becomes stateless and reusable."
   },
   {
     "q": "Which functions are used to create observable state values in Compose?",
@@ -110,7 +110,7 @@
       "subscribe and notify"
     ],
     "correct": 0,
-    "why": "The lecture explains that `mutableStateOf` creates an observable state and `remember` stores it across recompositions【543652055253700†L279-L282】."
+    "why": "The lecture explains that `mutableStateOf` creates an observable state and `remember` stores it across recompositions."
   },
   {
     "q": "Which of the following describes an event in the event‑state‑UI cycle?",
@@ -121,7 +121,7 @@
       "A thread running in the background"
     ],
     "correct": 0,
-    "why": "Events are actions or occurrences (user or system‑generated) that trigger state changes and drive UI updates【142401871453801†L146-L179】."
+    "why": "Events are actions or occurrences (user or system‑generated) that trigger state changes and drive UI updates."
   },
   {
     "q": "What happens when state changes in Compose?",
@@ -132,7 +132,7 @@
       "The app navigates back to the home screen"
     ],
     "correct": 0,
-    "why": "When the state changes, Compose recomposes the affected UI so that it reflects the updated state【142401871453801†L146-L179】."
+    "why": "When the state changes, Compose recomposes the affected UI so that it reflects the updated state."
   },
   {
     "q": "Which Jetpack Navigation component defines the possible navigation routes and destinations?",
@@ -143,7 +143,7 @@
       "MutableState"
     ],
     "correct": 0,
-    "why": "NavHost is used to define the navigation graph with routes and destinations for Jetpack Navigation【142401871453801†L14-L21】."
+    "why": "NavHost is used to define the navigation graph with routes and destinations for Jetpack Navigation."
   },
   {
     "q": "What does the NavController do in Jetpack Compose Navigation?",
@@ -154,7 +154,7 @@
       "Provides access to hardware sensors"
     ],
     "correct": 0,
-    "why": "NavController manages the navigation and back stack for Jetpack Navigation; it is passed to NavHost for navigation actions【142401871453801†L14-L21】."
+    "why": "NavController manages the navigation and back stack for Jetpack Navigation; it is passed to NavHost for navigation actions."
   },
   {
     "q": "How can you navigate to a different screen using NavController?",
@@ -165,7 +165,7 @@
       "Modify the XML layout file"
     ],
     "correct": 0,
-    "why": "You navigate by calling navController.navigate() with the destination's route name; this adds the destination to the back stack【142401871453801†L14-L21】."
+    "why": "You navigate by calling navController.navigate() with the destination's route name; this adds the destination to the back stack."
   },
   {
     "q": "Which function removes screens from the back stack up to a specified destination?",
@@ -176,7 +176,7 @@
       "startActivity()"
     ],
     "correct": 0,
-    "why": "The slides explain that popBackStack() and popUpTo() can be used to remove destinations from the back stack and navigate appropriately【142401871453801†L23-L26】."
+    "why": "The slides explain that popBackStack() and popUpTo() can be used to remove destinations from the back stack and navigate appropriately."
   },
   {
     "q": "What is the role of event listeners and handlers in Compose state management?",
@@ -187,7 +187,7 @@
       "They define XML layout files"
     ],
     "correct": 0,
-    "why": "Event listeners and handlers respond to user or system events and update state variables, which then trigger recomposition【142401871453801†L162-L179】."
+    "why": "Event listeners and handlers respond to user or system events and update state variables, which then trigger recomposition."
   },
   {
     "q": "What does the `remember` function do in the context of state management?",
@@ -198,7 +198,7 @@
       "Resets state on each recomposition"
     ],
     "correct": 0,
-    "why": "`remember` stores a value in memory during composition and recomposition; it does not persist through process death or configuration changes【543652055253700†L279-L282】."
+    "why": "`remember` stores a value in memory during composition and recomposition; it does not persist through process death or configuration changes."
   },
   {
     "q": "What will be the number of recompositions triggered for a TextField if a user enters four digits?",
@@ -209,7 +209,7 @@
       "Ten recompositions"
     ],
     "correct": 0,
-    "why": "Entering each character triggers a recomposition of the TextField and the Text composables; thus four characters result in four recompositions for each【142401871453801†L210-L213】."
+    "why": "Entering each character triggers a recomposition of the TextField and the Text composables; thus four characters result in four recompositions for each."
   },
   {
     "q": "Which parameter in TextField must be updated to reflect user input?",
@@ -220,7 +220,7 @@
       "keyboardOptions"
     ],
     "correct": 0,
-    "why": "The TextField example shows that the value parameter holds state and onValueChange updates it when the user types【142401871453801†L197-L207】."
+    "why": "The TextField example shows that the value parameter holds state and onValueChange updates it when the user types."
   },
   {
     "q": "What is the relationship between events, state and UI in Compose?",
@@ -231,7 +231,7 @@
       "Events and UI are unrelated to state"
     ],
     "correct": 0,
-    "why": "Events (user or system) trigger state changes; the updated state triggers recomposition of the UI【142401871453801†L146-L179】."
+    "why": "Events (user or system) trigger state changes; the updated state triggers recomposition of the UI."
   },
   {
     "q": "What is the recommended way to pass state to a stateless composable?",
@@ -242,7 +242,7 @@
       "Use rememberSaveable inside the stateless composable"
     ],
     "correct": 0,
-    "why": "A stateless composable receives the state value and a callback for updating it; this enables state hoisting and reuse【543652055253700†L286-L296】."
+    "why": "A stateless composable receives the state value and a callback for updating it; this enables state hoisting and reuse."
   },
   {
     "q": "When using Jetpack Navigation, what does the back button do by default?",
@@ -253,7 +253,7 @@
       "Starts a new task"
     ],
     "correct": 0,
-    "why": "Managing the back stack ensures that pressing the back button pops the current destination and returns to the previous one【142401871453801†L23-L26】."
+    "why": "Managing the back stack ensures that pressing the back button pops the current destination and returns to the previous one."
   },
   {
     "q": "What is a dynamic destination in Jetpack Navigation?",
@@ -264,7 +264,7 @@
       "An external web page"
     ],
     "correct": 0,
-    "why": "Dynamic destinations contain parameters in their route, allowing different content based on the argument【142401871453801†L14-L21】."
+    "why": "Dynamic destinations contain parameters in their route, allowing different content based on the argument."
   },
   {
     "q": "How can you prevent a child composable from modifying its own state?",
@@ -275,7 +275,7 @@
       "Use a static variable inside the composable"
     ],
     "correct": 0,
-    "why": "State hoisting moves the state to the parent, passing the value and a callback to the child so it cannot mutate its own state directly【543652055253700†L286-L296】."
+    "why": "State hoisting moves the state to the parent, passing the value and a callback to the child so it cannot mutate its own state directly."
   },
   {
     "q": "Which Compose API should be used when you need to persist state across configuration changes?",
@@ -286,7 +286,7 @@
       "liveDataOf"
     ],
     "correct": 0,
-    "why": "`rememberSaveable` saves state across configuration changes such as rotations, whereas `remember` does not persist beyond the process【285262186379052†L124-L130】."
+    "why": "`rememberSaveable` saves state across configuration changes such as rotations, whereas `remember` does not persist beyond the process."
   },
   {
     "q": "What is the effect of calling navController.popBackStack() without parameters?",
@@ -297,7 +297,7 @@
       "It does nothing"
     ],
     "correct": 0,
-    "why": "popBackStack() removes the top entry from the back stack, returning to the previous destination【142401871453801†L23-L26】."
+    "why": "popBackStack() removes the top entry from the back stack, returning to the previous destination."
   },
   {
     "q": "In Compose, what does `rememberSaveable` use under the hood to persist primitive values?",
@@ -308,7 +308,7 @@
       "MutableState"
     ],
     "correct": 0,
-    "why": "rememberSaveable saves values using the SavedInstanceState mechanism to restore them after configuration changes【285262186379052†L124-L130】."
+    "why": "rememberSaveable saves values using the SavedInstanceState mechanism to restore them after configuration changes."
   },
   {
     "q": "Why is state hoisting important for reusability?",
@@ -319,7 +319,7 @@
       "It prevents passing parameters to composables"
     ],
     "correct": 0,
-    "why": "Hoisting state to the parent makes a composable more reusable and testable because it no longer owns its own state【543652055253700†L286-L296】."
+    "why": "Hoisting state to the parent makes a composable more reusable and testable because it no longer owns its own state."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun ParentScreen() {\n    var counter by rememberSaveable { mutableStateOf(0) }\n    Column {\n        CounterComponent(counter, { counter = it })\n        Text(\"Parent Counter: $counter\")\n    }\n}\n@Composable\nfun CounterComponent(counter: Int, onCounterChange: (Int) -> Unit) {\n    Button(onClick = { onCounterChange(counter + 1) }) {\n        Text(\"Increment: $counter\")\n    }\n}</pre>\nIf the user clicks the Increment button three times, what will be displayed?",
@@ -330,7 +330,7 @@
       "Increment: 0, Parent Counter: 0"
     ],
     "correct": 2,
-    "why": "Clicking the button calls onCounterChange with the incremented value, updating the state in ParentScreen. After three clicks both counter and the argument passed to CounterComponent are 3, so both texts show 3【142401871453801†L14-L26】."
+    "why": "Clicking the button calls onCounterChange with the incremented value, updating the state in ParentScreen. After three clicks both counter and the argument passed to CounterComponent are 3, so both texts show 3."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

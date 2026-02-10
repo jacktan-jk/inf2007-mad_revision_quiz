@@ -88,7 +88,7 @@
       "It disables deep links"
     ],
     "correct": 0,
-    "why": "Nested navigation allows different sections of the app to be organized into separate graphs, improving modularity【285262186379052†L46-L53】."
+    "why": "Nested navigation allows different sections of the app to be organized into separate graphs, improving modularity."
   },
   {
     "q": "What is a deep link in the context of Android navigation?",
@@ -99,7 +99,7 @@
       "A type of database query"
     ],
     "correct": 0,
-    "why": "Deep links allow users to jump straight to a specific screen (e.g., from a notification) by defining URI patterns in NavHost and the manifest【285262186379052†L55-L63】."
+    "why": "Deep links allow users to jump straight to a specific screen (e.g., from a notification) by defining URI patterns in NavHost and the manifest."
   },
   {
     "q": "How do you register a deep link in Jetpack Compose Navigation?",
@@ -110,7 +110,7 @@
       "Create an external XML file"
     ],
     "correct": 0,
-    "why": "navDeepLink() associates a URI pattern with a specific composable destination【285262186379052†L66-L72】."
+    "why": "navDeepLink() associates a URI pattern with a specific composable destination."
   },
   {
     "q": "What is required to support dynamic deep link arguments in a route?",
@@ -121,7 +121,7 @@
       "Use a global static variable"
     ],
     "correct": 0,
-    "why": "Dynamic deep linking requires specifying placeholders (e.g., {username}) in the route pattern to capture parameters【285262186379052†L74-L78】."
+    "why": "Dynamic deep linking requires specifying placeholders (e.g., {username}) in the route pattern to capture parameters."
   },
   {
     "q": "How can you trigger a deep link within your own app?",
@@ -132,7 +132,7 @@
       "Modify the AndroidManifest at runtime"
     ],
     "correct": 0,
-    "why": "To trigger a deep link internally, attach a deepLinkPendingIntent to a notification, button or event【285262186379052†L80-L83】."
+    "why": "To trigger a deep link internally, attach a deepLinkPendingIntent to a notification, button or event."
   },
   {
     "q": "Why should you avoid passing NavController into a ViewModel?",
@@ -143,7 +143,7 @@
       "There is no reason to avoid it"
     ],
     "correct": 0,
-    "why": "The slides emphasize separating logic from layout and keeping ViewModels unaware of the framework; state should drive navigation, not a NavController reference【285262186379052†L132-L142】【285262186379052†L180-L184】."
+    "why": "The slides emphasize separating logic from layout and keeping ViewModels unaware of the framework; state should drive navigation, not a NavController reference."
   },
   {
     "q": "What lifecycle property of ViewModels allows them to survive configuration changes such as screen rotations?",
@@ -154,7 +154,7 @@
       "They live forever, even if the user leaves the app"
     ],
     "correct": 0,
-    "why": "ViewModels live as long as their scope (e.g., NavBackStackEntry) remains in memory; they survive configuration changes and are cleared only when the scope is destroyed【285262186379052†L147-L155】."
+    "why": "ViewModels live as long as their scope (e.g., NavBackStackEntry) remains in memory; they survive configuration changes and are cleared only when the scope is destroyed."
   },
   {
     "q": "What is the ViewModel factory responsible for?",
@@ -165,7 +165,7 @@
       "Replacing the need for rememberSaveable"
     ],
     "correct": 0,
-    "why": "The ViewModel factory caches the instance of a ViewModel so that multiple requests during recomposition return the same instance【285262186379052†L160-L165】."
+    "why": "The ViewModel factory caches the instance of a ViewModel so that multiple requests during recomposition return the same instance."
   },
   {
     "q": "Which statement about `remember` and ViewModels is correct?",
@@ -176,7 +176,7 @@
       "remember always persists state across activity recreation"
     ],
     "correct": 0,
-    "why": "remember stores values during a composition but does not persist through configuration changes, whereas ViewModel persists state across configuration changes【285262186379052†L124-L130】【285262186379052†L147-L155】."
+    "why": "remember stores values during a composition but does not persist through configuration changes, whereas ViewModel persists state across configuration changes."
   },
   {
     "q": "How should you share state across multiple screens in a navigation graph?",
@@ -187,7 +187,7 @@
       "Pass the state via Intent extras on every navigation action"
     ],
     "correct": 0,
-    "why": "Sharing state across screens is achieved by scoping the ViewModel to a parent (e.g., Activity or NavGraph) that outlives individual destinations【285262186379052†L193-L196】."
+    "why": "Sharing state across screens is achieved by scoping the ViewModel to a parent (e.g., Activity or NavGraph) that outlives individual destinations."
   },
   {
     "q": "Which API helps persist complex UI state beyond primitives when rememberSaveable falls short?",
@@ -198,7 +198,7 @@
       "Room database"
     ],
     "correct": 0,
-    "why": "rememberSaveable works well for primitives but more complex logic or navigation state should be stored in a ViewModel【285262186379052†L124-L130】【285262186379052†L132-L142】."
+    "why": "rememberSaveable works well for primitives but more complex logic or navigation state should be stored in a ViewModel."
   },
   {
     "q": "What pattern should you follow when using state and events with ViewModel and Compose?",
@@ -209,7 +209,7 @@
       "Global mutable state without encapsulation"
     ],
     "correct": 0,
-    "why": "The slides advocate unidirectional data flow: UI observes state from ViewModel and sends events back, without ViewModel depending on UI objects【285262186379052†L132-L142】."
+    "why": "The slides advocate unidirectional data flow: UI observes state from ViewModel and sends events back, without ViewModel depending on UI objects."
   },
   {
     "q": "Which function obtains a ViewModel instance scoped to the current NavBackStackEntry in Compose?",
@@ -220,7 +220,7 @@
       "NavController.getViewModel()"
     ],
     "correct": 0,
-    "why": "The viewModel() function provides a ViewModel instance scoped to the current navigation back stack entry, caching it for reuse【285262186379052†L160-L165】."
+    "why": "The viewModel() function provides a ViewModel instance scoped to the current navigation back stack entry, caching it for reuse."
   },
   {
     "q": "If a user navigates from ScreenA to ScreenB and increments a counter in ScreenB, what happens to the counter when the user navigates back to ScreenA using the back button?",
@@ -231,7 +231,7 @@
       "The counter doubles in value"
     ],
     "correct": 0,
-    "why": "Scoping a ViewModel to a parent graph or activity allows state (like a counter) to persist across screens and survive back navigation【285262186379052†L193-L196】."
+    "why": "Scoping a ViewModel to a parent graph or activity allows state (like a counter) to persist across screens and survive back navigation."
   },
   {
     "q": "Why is `mutableStateOf` still used inside a ViewModel?",
@@ -242,7 +242,7 @@
       "It is the only way to store integers"
     ],
     "correct": 0,
-    "why": "mutableStateOf bridges ViewModel state to Compose; when the value changes, Compose observes the state and recomposes【285262186379052†L167-L170】."
+    "why": "mutableStateOf bridges ViewModel state to Compose; when the value changes, Compose observes the state and recomposes."
   },
   {
     "q": "Which of the following best describes unidirectional data flow in the context of Compose and ViewModel?",
@@ -253,7 +253,7 @@
       "Events are ignored and state is static"
     ],
     "correct": 0,
-    "why": "Unidirectional data flow means that the UI reads state from the ViewModel and dispatches events back; the ViewModel processes events and emits new state【285262186379052†L132-L142】."
+    "why": "Unidirectional data flow means that the UI reads state from the ViewModel and dispatches events back; the ViewModel processes events and emits new state."
   },
   {
     "q": "What happens to a ViewModel when its owning navigation scope is popped off the back stack?",
@@ -264,7 +264,7 @@
       "It moves to the next activity"
     ],
     "correct": 0,
-    "why": "A ViewModel is cleared when its owning scope (NavBackStackEntry) is removed from memory, such as when the user exits the flow【285262186379052†L147-L155】."
+    "why": "A ViewModel is cleared when its owning scope (NavBackStackEntry) is removed from memory, such as when the user exits the flow."
   },
   {
     "q": "Which of the following is a correct way to define a deep link URI pattern in navDeepLink?",
@@ -275,7 +275,7 @@
       "navDeepLink(pattern = \"example.com\")"
     ],
     "correct": 0,
-    "why": "The slides show defining a deep link with a uriPattern containing a placeholder for a dynamic argument【285262186379052†L74-L78】."
+    "why": "The slides show defining a deep link with a uriPattern containing a placeholder for a dynamic argument."
   },
   {
     "q": "What is the purpose of a PendingIntent used with deep links?",
@@ -286,7 +286,7 @@
       "It automatically creates a NavController"
     ],
     "correct": 0,
-    "why": "Triggering a deep link often involves attaching a PendingIntent containing the deep link URI to a notification or button【285262186379052†L80-L83】."
+    "why": "Triggering a deep link often involves attaching a PendingIntent containing the deep link URI to a notification or button."
   },
   {
     "q": "Why might rememberSaveable be insufficient for complex navigation state?",
@@ -297,7 +297,7 @@
       "Because it is deprecated"
     ],
     "correct": 0,
-    "why": "The slides note that rememberSaveable works well for primitives but fails on complex logic or navigation, which should be managed by a ViewModel【285262186379052†L124-L130】."
+    "why": "The slides note that rememberSaveable works well for primitives but fails on complex logic or navigation, which should be managed by a ViewModel."
   },
   {
     "q": "<pre class=\"code-block\">navController.navigate(\"details\")\nnavController.navigate(\"profile\")\nnavController.popBackStack(\"details\", inclusive = true)</pre>\nWhat will be the resulting back stack?",
@@ -308,7 +308,7 @@
       "The Details and Profile screens are removed, leaving only HomeScreen"
     ],
     "correct": 3,
-    "why": "popBackStack(\"details\", inclusive = true) removes entries up to and including the \"details\" destination. Since the stack was [Home, details, profile], both profile and details are removed, leaving Home on top【285262186379052†L46-L53】."
+    "why": "popBackStack(\"details\", inclusive = true) removes entries up to and including the \"details\" destination. Since the stack was [Home, details, profile], both profile and details are removed, leaving Home on top."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

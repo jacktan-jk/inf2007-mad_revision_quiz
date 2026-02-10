@@ -88,7 +88,7 @@
       "Compilation error"
     ],
     "correct": 1,
-    "why": "Using var allows reassignment, and val y holds the final value of x (15) which is printed【987723225263861†L24-L31】."
+    "why": "Using var allows reassignment, and val y holds the final value of x (15) which is printed."
   },
   {
     "q": "<pre class=\"code-block\">fun safeLength(str: String?): Int {\n    return str?.length ?: 0\n}\nfun main() {\n    val name: String? = null\n    println(safeLength(name))\n}</pre>\nWhat is printed when this code runs?",
@@ -99,7 +99,7 @@
       "Throws NullPointerException"
     ],
     "correct": 0,
-    "why": "The safe call (?.) returns null and the Elvis operator returns 0 when null, so 0 is printed【987723225263861†L44-L54】."
+    "why": "The safe call (?.) returns null and the Elvis operator returns 0 when null, so 0 is printed."
   },
   {
     "q": "<pre class=\"code-block\">fun evaluate(n: Int): String {\n    return when (n) {\n        1 -> \"One\"\n        2 -> \"Two\"\n        else -> \"Other\"\n    }\n}\nfun main() {\n    println(evaluate(2))\n}</pre>\nWhat does this program print?",
@@ -110,7 +110,7 @@
       "Compilation error"
     ],
     "correct": 1,
-    "why": "The when expression returns \"Two\" when the input is 2【987723225263861†L79-L86】."
+    "why": "The when expression returns \"Two\" when the input is 2."
   },
   {
     "q": "<pre class=\"code-block\">fun main() {\n    val sum: (Int, Int) -> Int = { a, b -> a + b }\n    println(sum(3, 4))\n}</pre>\nWhat is printed by this code?",
@@ -121,7 +121,7 @@
       "Compilation error"
     ],
     "correct": 0,
-    "why": "A lambda expression sums its two arguments; sum(3, 4) is 7【987723225263861†L139-L150】."
+    "why": "A lambda expression sums its two arguments; sum(3, 4) is 7."
   },
   {
     "q": "<pre class=\"code-block\">class BankAccount(private var balance: Int) {\n    fun deposit(amount: Int) {\n        balance += amount\n    }\n    fun getBalance(): Int = balance\n}\nfun main() {\n    val account = BankAccount(100)\n    account.deposit(50)\n    println(account.getBalance())\n}</pre>\nWhat value is printed?",
@@ -132,7 +132,7 @@
       "Compilation error"
     ],
     "correct": 2,
-    "why": "deposit() updates the private balance property and getBalance() returns it. 100 + 50 = 150【987723225263861†L123-L130】."
+    "why": "deposit() updates the private balance property and getBalance() returns it. 100 + 50 = 150."
   },
   {
     "q": "<pre class=\"code-block\">fun main() {\n    val text: String? = \"Compose\"\n    text?.let {\n        println(it.uppercase())\n    }\n}</pre>\nWhat is printed by this program?",
@@ -143,7 +143,7 @@
       "Nothing is printed"
     ],
     "correct": 1,
-    "why": "let executes only when the receiver is non-null; it prints the uppercase version of the string【987723225263861†L152-L166】."
+    "why": "let executes only when the receiver is non-null; it prints the uppercase version of the string."
   },
   {
     "q": "<pre class=\"code-block\">val intent = Intent(this, ProfileActivity::class.java)\nstartActivity(intent)</pre>\nWhat does this code do in an Android Activity?",
@@ -154,7 +154,7 @@
       "It registers a ContentProvider"
     ],
     "correct": 0,
-    "why": "An explicit Intent with a context and target class launches the ProfileActivity when passed to startActivity()【594818497736741†L103-L116】."
+    "why": "An explicit Intent with a context and target class launches the ProfileActivity when passed to startActivity()."
   },
   {
     "q": "<pre class=\"code-block\">val intentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)\nval receiver = object : BroadcastReceiver() {\n    override fun onReceive(context: Context, intent: Intent?) {\n        println(\"Airplane mode changed\")\n    }\n}\nregisterReceiver(receiver, intentFilter)</pre>\nWhich component listens for the airplane mode change?",
@@ -165,7 +165,7 @@
       "ContentProvider"
     ],
     "correct": 2,
-    "why": "The code creates an anonymous BroadcastReceiver to handle the AIRPLANE_MODE_CHANGED broadcast【594818497736741†L191-L198】."
+    "why": "The code creates an anonymous BroadcastReceiver to handle the AIRPLANE_MODE_CHANGED broadcast."
   },
   {
     "q": "<pre class=\"code-block\">fun marking(homework: String, compute: () -> Int) {\n    println(\"$homework result:\")\n    val result = compute()\n    println(if (result >= 50) \"You pass!\" else \"You fail!\")\n}\nfun main() {\n    marking(\"Lab 1\") {\n        val q1 = 4\n        val q2 = 1\n        (q1 + q2) * 10 // Return value implicitly\n    }\n}</pre>\nWhat does this program output?",
@@ -176,7 +176,7 @@
       "You pass!"
     ],
     "correct": 2,
-    "why": "(4+1)*10 = 50 so the conditional prints \"You pass!\" after \"Lab 1 result:\"【987723225263861†L139-L150】."
+    "why": "(4+1)*10 = 50 so the conditional prints \"You pass!\" after \"Lab 1 result:\"."
   },
   {
     "q": "<pre class=\"code-block\">fun Greeting(name: String) {\n    Text(\"Hello $name\")\n}</pre>\nIs Greeting() a composable function?",
@@ -187,7 +187,7 @@
       "Only if called inside @Composable"
     ],
     "correct": 1,
-    "why": "A function must be annotated with @Composable to be treated as a composable; Greeting lacks that annotation【543652055253700†L106-L111】."
+    "why": "A function must be annotated with @Composable to be treated as a composable; Greeting lacks that annotation."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun CounterExample() {\n    var count = 0\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nWhat happens when the user clicks the button?",
@@ -198,7 +198,7 @@
       "Button becomes disabled"
     ],
     "correct": 1,
-    "why": "Without remember, count is a local variable that resets on every recomposition; clicking triggers recomposition so the displayed value remains 0【543652055253700†L279-L282】."
+    "why": "Without remember, count is a local variable that resets on every recomposition; clicking triggers recomposition so the displayed value remains 0."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun CounterExample2() {\n    var count by remember { mutableStateOf(0) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nAfter pressing the button three times, what text is shown?",
@@ -209,7 +209,7 @@
       "The app crashes"
     ],
     "correct": 0,
-    "why": "remember with mutableStateOf stores the state across recompositions; each click increments the counter so after three clicks it displays 3【543652055253700†L279-L282】."
+    "why": "remember with mutableStateOf stores the state across recompositions; each click increments the counter so after three clicks it displays 3."
   },
   {
     "q": "<pre class=\"code-block\">Box(\n    modifier = Modifier.size(100.dp).size(200.dp)\n) {\n    Text(\"Hello\")\n}</pre>\nWhat is the final size of the Box?",
@@ -220,7 +220,7 @@
       "It has zero size"
     ],
     "correct": 1,
-    "why": "When chaining size modifiers, the last one wins; the Box ends up sized at 200 dp【543652055253700†L229-L236】."
+    "why": "When chaining size modifiers, the last one wins; the Box ends up sized at 200 dp."
   },
   {
     "q": "<pre class=\"code-block\">Scaffold(\n    topBar = { TopAppBar(title = { Text(\"App\") }) },\n    floatingActionButton = { FloatingActionButton(onClick = {}) { Text(\"FAB\") } }\n) { innerPadding ->\n    Text(\"Content\", modifier = Modifier.padding(innerPadding))\n}</pre>\nWhich slot places the floating action button?",
@@ -231,7 +231,7 @@
       "drawerContent"
     ],
     "correct": 1,
-    "why": "Scaffold provides specific slots like topBar, bottomBar and floatingActionButton; the FAB is provided via the floatingActionButton slot【543652055253700†L178-L190】."
+    "why": "Scaffold provides specific slots like topBar, bottomBar and floatingActionButton; the FAB is provided via the floatingActionButton slot."
   },
   {
     "q": "<pre class=\"code-block\">navController.navigate(\"profile\")\nnavController.navigate(\"settings\")\nnavController.popBackStack()</pre>\nAfter executing these calls, where does the user end up?",
@@ -242,7 +242,7 @@
       "The entire stack is cleared"
     ],
     "correct": 1,
-    "why": "popBackStack() without parameters removes the top destination (settings) and returns to the previous destination (profile)【142401871453801†L14-L26】."
+    "why": "popBackStack() without parameters removes the top destination (settings) and returns to the previous destination (profile)."
   },
   {
     "q": "<pre class=\"code-block\">class CounterViewModel : ViewModel() {\n    var count by mutableStateOf(0)\n}</pre>\nWhich statement about this ViewModel is true?",
@@ -253,7 +253,7 @@
       "mutableStateOf is unnecessary"
     ],
     "correct": 0,
-    "why": "A ViewModel survives configuration changes; the mutableStateOf value persists as long as the ViewModel exists【285262186379052†L147-L155】."
+    "why": "A ViewModel survives configuration changes; the mutableStateOf value persists as long as the ViewModel exists."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun RememberDemo() {\n    var text by remember { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nWhat happens to the text when the device rotates?",
@@ -264,7 +264,7 @@
       "The text duplicates"
     ],
     "correct": 0,
-    "why": "remember does not persist state across configuration changes; the value resets on rotation【285262186379052†L124-L130】."
+    "why": "remember does not persist state across configuration changes; the value resets on rotation."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun RememberSaveableDemo() {\n    var text by rememberSaveable { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nHow does this behave across a device rotation?",
@@ -275,7 +275,7 @@
       "The state is saved only if text is numeric"
     ],
     "correct": 1,
-    "why": "rememberSaveable persists the state using SavedInstanceState; after rotation the text remains【285262186379052†L124-L130】."
+    "why": "rememberSaveable persists the state using SavedInstanceState; after rotation the text remains."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun ToggleExample() {\n    var enabled by remember { mutableStateOf(true) }\n    Switch(checked = enabled, onCheckedChange = { enabled = it })\n}</pre>\nWhat happens when the user toggles the switch?",
@@ -286,7 +286,7 @@
       "The app crashes"
     ],
     "correct": 0,
-    "why": "Switch updates the mutableStateOf value and triggers recomposition; the UI shows the new state【142401871453801†L146-L179】."
+    "why": "Switch updates the mutableStateOf value and triggers recomposition; the UI shows the new state."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun StatelessToggle(enabled: Boolean, onToggle: (Boolean) -> Unit) {\n    Switch(checked = enabled, onCheckedChange = onToggle)\n}\n@Composable\nfun Parent() {\n    var enabled by remember { mutableStateOf(false) }\n    StatelessToggle(enabled = enabled, onToggle = { enabled = it })\n}</pre>\nWhat pattern does this illustrate?",
@@ -297,7 +297,7 @@
       "Global mutable state"
     ],
     "correct": 0,
-    "why": "Moving state to the parent composable and passing it down with callbacks is an example of state hoisting【543652055253700†L286-L296】."
+    "why": "Moving state to the parent composable and passing it down with callbacks is an example of state hoisting."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

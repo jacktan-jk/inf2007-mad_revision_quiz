@@ -88,7 +88,7 @@
       "To force developers to write UI in Java"
     ],
     "correct": 0,
-    "why": "Compose addresses limitations of the old XML view system by unifying UI and logic and using a declarative, state‑driven model【543652055253700†L33-L41】【543652055253700†L67-L72】."
+    "why": "Compose addresses limitations of the old XML view system by unifying UI and logic and using a declarative, state‑driven model."
   },
   {
     "q": "In Jetpack Compose's declarative model, the UI is defined as a function of what?",
@@ -99,7 +99,7 @@
       "Layout files"
     ],
     "correct": 0,
-    "why": "The declarative UI model states that the UI is a function of state: UI = f(state)【543652055253700†L88-L100】."
+    "why": "The declarative UI model states that the UI is a function of state: UI = f(state)."
   },
   {
     "q": "Which annotation identifies a function as a composable in Jetpack Compose?",
@@ -110,7 +110,7 @@
       "@Layout"
     ],
     "correct": 0,
-    "why": "Composable functions are annotated with @Composable【543652055253700†L106-L111】."
+    "why": "Composable functions are annotated with @Composable."
   },
   {
     "q": "What property should composable functions exhibit to encourage predictability?",
@@ -121,7 +121,7 @@
       "They should cache results across all calls"
     ],
     "correct": 0,
-    "why": "Composable functions are expected to be pure: the same input produces the same output and no side effects【543652055253700†L114-L117】."
+    "why": "Composable functions are expected to be pure: the same input produces the same output and no side effects."
   },
   {
     "q": "How does Compose handle dynamic content within a composable?",
@@ -132,7 +132,7 @@
       "You need to write reflection code"
     ],
     "correct": 0,
-    "why": "Composable functions are written in Kotlin, allowing use of if statements, loops and helper functions for dynamic UI【543652055253700†L120-L131】."
+    "why": "Composable functions are written in Kotlin, allowing use of if statements, loops and helper functions for dynamic UI."
   },
   {
     "q": "What triggers a recomposition in Jetpack Compose?",
@@ -143,7 +143,7 @@
       "Opening and closing the app"
     ],
     "correct": 0,
-    "why": "Recomposition occurs when a composable's input state changes; Compose then redraws the affected UI elements【543652055253700†L142-L161】."
+    "why": "Recomposition occurs when a composable's input state changes; Compose then redraws the affected UI elements."
   },
   {
     "q": "Which of the following statements about recomposition is true?",
@@ -154,7 +154,7 @@
       "Recomposition triggers a full device reboot"
     ],
     "correct": 0,
-    "why": "Compose performs intelligent recomposition, updating only the parts of the UI tree whose inputs changed【543652055253700†L142-L161】."
+    "why": "Compose performs intelligent recomposition, updating only the parts of the UI tree whose inputs changed."
   },
   {
     "q": "What is a slot‑based layout in Jetpack Compose?",
@@ -165,7 +165,7 @@
       "A form of navigation controller"
     ],
     "correct": 0,
-    "why": "The slides describe slot‑based layouts such as Scaffold that provide slots for common top‑level Material components【543652055253700†L199-L210】."
+    "why": "The slides describe slot‑based layouts such as Scaffold that provide slots for common top‑level Material components."
   },
   {
     "q": "Which list shows common top‑level components provided by Scaffold?",
@@ -176,7 +176,7 @@
       "AlertDialog, Snackbar, Tooltip"
     ],
     "correct": 0,
-    "why": "Scaffold offers slots for TopAppBar, BottomAppBar, FloatingActionButton, Drawer and other Material components【543652055253700†L199-L210】."
+    "why": "Scaffold offers slots for TopAppBar, BottomAppBar, FloatingActionButton, Drawer and other Material components."
   },
   {
     "q": "What is the purpose of modifiers in Jetpack Compose?",
@@ -187,7 +187,7 @@
       "They provide navigation between screens"
     ],
     "correct": 0,
-    "why": "Modifiers change a composable's size, layout, appearance and can add interactions like click handling【543652055253700†L229-L236】."
+    "why": "Modifiers change a composable's size, layout, appearance and can add interactions like click handling."
   },
   {
     "q": "In Compose, what does `remember` do?",
@@ -198,7 +198,7 @@
       "Automatically persists state through configuration changes"
     ],
     "correct": 0,
-    "why": "The `remember` function stores a value in memory across recompositions【543652055253700†L279-L282】."
+    "why": "The `remember` function stores a value in memory across recompositions."
   },
   {
     "q": "What type does `mutableStateOf()` return?",
@@ -209,7 +209,7 @@
       "An immutable value with no updates"
     ],
     "correct": 0,
-    "why": "`mutableStateOf` returns a MutableState instance; when the value changes, Compose automatically updates the UI【543652055253700†L279-L282】."
+    "why": "`mutableStateOf` returns a MutableState instance; when the value changes, Compose automatically updates the UI."
   },
   {
     "q": "What is state hoisting?",
@@ -220,7 +220,7 @@
       "Persisting state through device rotations"
     ],
     "correct": 0,
-    "why": "State hoisting moves state out of a composable, making it stateless and easier to reuse and test【543652055253700†L286-L296】."
+    "why": "State hoisting moves state out of a composable, making it stateless and easier to reuse and test."
   },
   {
     "q": "What happens when you attach multiple modifiers in a chain to a composable?",
@@ -231,7 +231,7 @@
       "Modifiers are ignored if more than two are used"
     ],
     "correct": 0,
-    "why": "Modifiers called in a chain wrap the effects of previous modifiers; the order of modifiers matters【543652055253700†L242-L245】."
+    "why": "Modifiers called in a chain wrap the effects of previous modifiers; the order of modifiers matters."
   },
   {
     "q": "Which of the following is true about UI state in Jetpack Compose?",
@@ -242,7 +242,7 @@
       "UI state is always global"
     ],
     "correct": 0,
-    "why": "The slides state that the UI is immutable; what changes is the state, which triggers recomposition to update the UI【543652055253700†L259-L265】."
+    "why": "The slides state that the UI is immutable; what changes is the state, which triggers recomposition to update the UI."
   },
   {
     "q": "Which of these describes a stateless composable?",
@@ -253,7 +253,7 @@
       "A composable that cannot accept parameters"
     ],
     "correct": 0,
-    "why": "Stateless composables do not hold state; instead, they take state and event handlers as parameters【543652055253700†L286-L296】."
+    "why": "Stateless composables do not hold state; instead, they take state and event handlers as parameters."
   },
   {
     "q": "Which Compose function allows you to preview a composable in Android Studio?",
@@ -264,7 +264,7 @@
       "@MainActivity"
     ],
     "correct": 0,
-    "why": "The slides mention that @Preview can be used to preview composables in Android Studio【543652055253700†L166-L170】."
+    "why": "The slides mention that @Preview can be used to preview composables in Android Studio."
   },
   {
     "q": "How does Compose treat UI elements internally?",
@@ -275,7 +275,7 @@
       "As XML nodes only"
     ],
     "correct": 0,
-    "why": "Compose constructs a UI tree where each element (e.g., Text, Column) is nested within others【543652055253700†L178-L190】."
+    "why": "Compose constructs a UI tree where each element (e.g., Text, Column) is nested within others."
   },
   {
     "q": "Which layout arranges children horizontally in Compose?",
@@ -286,7 +286,7 @@
       "Scaffold"
     ],
     "correct": 0,
-    "why": "Row arranges children side by side, while Column arranges them vertically and Box layers them【543652055253700†L178-L190】."
+    "why": "Row arranges children side by side, while Column arranges them vertically and Box layers them."
   },
   {
     "q": "Which function stores a value across recompositions, but does not survive configuration changes?",
@@ -297,7 +297,7 @@
       "liveData"
     ],
     "correct": 0,
-    "why": "`remember` stores a value in memory across recompositions; configuration changes require rememberSaveable or ViewModel【543652055253700†L279-L282】."
+    "why": "`remember` stores a value in memory across recompositions; configuration changes require rememberSaveable or ViewModel."
   },
   {
     "q": "Which component should not be passed into a ViewModel for navigation purposes?",
@@ -308,7 +308,7 @@
       "Int"
     ],
     "correct": 0,
-    "why": "Later lectures emphasize that the NavController should not be passed into ViewModels; state should drive navigation instead【285262186379052†L180-L184】."
+    "why": "Later lectures emphasize that the NavController should not be passed into ViewModels; state should drive navigation instead."
   },
   {
     "q": "Which Compose modifier would you use to handle click events on a Box?",
@@ -319,7 +319,7 @@
       "Modifier.background(Color.Red)"
     ],
     "correct": 0,
-    "why": "Modifiers can add high‑level interactions; clickable() makes a composable respond to click events【543652055253700†L229-L236】."
+    "why": "Modifiers can add high‑level interactions; clickable() makes a composable respond to click events."
   },
   {
     "q": "What happens if a composable calls different composables during recomposition?",
@@ -330,7 +330,7 @@
       "The app closes"
     ],
     "correct": 0,
-    "why": "During recomposition, Compose tracks which composables were invoked and skips recomposing those whose inputs haven't changed【543652055253700†L216-L221】."
+    "why": "During recomposition, Compose tracks which composables were invoked and skips recomposing those whose inputs haven't changed."
   },
   {
     "q": "<pre class=\"code-block\">@Composable\nfun Counter() {\n    var count by remember { mutableStateOf(1) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nIf the user clicks the button twice, what text appears on the button?",
@@ -341,7 +341,7 @@
       "Count: 0"
     ],
     "correct": 2,
-    "why": "The initial value of count is 1. Each click increments count by 1, so after two clicks the value is 3 and the button displays \"Count: 3\"【543652055253700†L279-L282】."
+    "why": "The initial value of count is 1. Each click increments count by 1, so after two clicks the value is 3 and the button displays \"Count: 3\"."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
