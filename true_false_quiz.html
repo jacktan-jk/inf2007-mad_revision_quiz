@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF2007 – True/False MCQ Quiz</title>
+  <style>
+    :root { --maxw: 980px; --accent: #0f766e; --muted:#6b7280; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Noto Sans", sans-serif; line-height: 1.45; margin: 0; background: #f7f7f8;
+    color:#111827; }
+    header { background: white; border-bottom: 1px solid #e5e7eb; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 18px 16px; }
+    h1 { font-size: clamp(20px, 2.6vw, 28px); margin: 0 0 6px; }
+    .sub { color: var(--muted); font-size: 14px; }
+    .controls { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px }
+    button { cursor:pointer; border:1px solid #e5e7eb; background:white;
+    padding:8px 12px; border-radius:10px; font-weight:600; }
+    button.primary { background: var(--accent); color: white; border-color:
+    var(--accent); }
+    button:disabled { opacity:.6; cursor:not-allowed }
+    .stats { display:flex; gap:18px; align-items:center; margin-top:10px; }
+    .pill { background:#eef2ff; color:#3730a3; font-weight:700; padding:6px
+    10px; border-radius:999px; }
+    main { max-width: var(--maxw); margin: 12px auto 60px; padding: 0 16px; }
+    .qcard { background:white; border:1px solid #e5e7eb; border-radius:14px;
+    padding:14px; margin:14px 0; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+    .qhead { display:flex; justify-content:space-between; align-items:baseline;
+    gap:6px }
+    .qtitle { font-weight:700; margin:0 0 8px }
+    .badge { font-size:12px; color:#374151; background:#f3f4f6; border:1px
+    solid #e5e7eb; padding:2px 8px; border-radius:999px }
+    .opts { display:grid; gap:8px; margin-top:8px }
+    .opt { display:flex; gap:10px; align-items:flex-start; padding:10px;
+    border:1px solid #e5e7eb; border-radius:12px; background:white; cursor:pointer; }
+    .opt:hover { border-color:#c7d2fe; }
+    .opt.correct { border-color:#16a34a; background:#f0fdf4; }
+    .opt.wrong { border-color:#dc2626; background:#fef2f2; }
+    .opt.disabled { pointer-events:none; opacity:.8 }
+    .letter { width:28px; height:28px; border-radius:999px; border:1px
+    solid #e5e7eb; display:grid; place-items:center; font-weight:700; }
+    .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
+    color:#111827; }
+    .exp strong { color:#065f46 }
+    footer { text-align:center; color:#6b7280; padding:30px 12px; }
+    details > summary { cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>INF2007 – True/False MCQ Quiz</h1>
+      <div class="sub">INF2007 – Mobile Application Development • True/False review</div>
+      <div class="stats" id="stats">
+        <span class="pill" id="score">Score: 0</span>
+        <span class="pill" id="progress">Answered: 0 / 0</span>
+        <span class="pill" id="percent">0%</span>
+      </div>
+      <div class="controls">
+        <button class="primary" id="resetBtn" title="Reset the quiz to try again">Reset quiz</button>
+        <button id="revealBtn" title="Reveal correct answers for all questions">Reveal all answers</button>
+        <button id="shuffleBtn" title="Shuffle questions and answer options">Shuffle</button>
+      </div>
+    </div>
+  </header>
+  <main id="quiz"></main>
+  <footer>
+    Based on lecture material. This educational quiz is for practice.
+  </footer>
+  <script>
+    const QUESTIONS = [
+      { q: "var declarations create immutable values in Kotlin.", options: ["True","False"], correct: 1,
+        why: "In Kotlin, `var` declares a mutable variable whereas `val` declares an immutable value." },
+      { q: "Kotlin allows you to omit explicit type annotations when the type can be inferred.", options: ["True","False"], correct: 0,
+        why: "Kotlin’s type inference means explicit types are optional when the compiler can deduce them from the initializer." },
+      { q: "In Kotlin, variables cannot hold null values unless their type is marked with a question mark (?).", options: ["True","False"], correct: 0,
+        why: "Null safety in Kotlin enforces non-null types by default; appending `?` to the type name permits nulls." },
+      { q: "A `when` expression in Kotlin requires an `else` branch if not all possible cases are handled.", options: ["True","False"], correct: 0,
+        why: "A `when` expression used as an expression must be exhaustive, so an `else` branch covers any remaining cases." },
+      { q: "Lambda expressions in Kotlin can be assigned to variables and passed as parameters to functions.", options: ["True","False"], correct: 0,
+        why: "Lambdas are anonymous functions; they can be stored in variables and passed to other functions just like any value." },
+      { q: "The Android runtime on modern devices uses the Dalvik virtual machine by default.", options: ["True","False"], correct: 1,
+        why: "Modern Android versions use the ART (Android Runtime); Dalvik was replaced for improved performance." },
+      { q: "Activities provide the UI screens of an Android application and manage user interactions.", options: ["True","False"], correct: 0,
+        why: "An Activity represents a single screen with a user interface and handles lifecycle and interaction events." },
+      { q: "BroadcastReceivers provide a user interface and handle background tasks.", options: ["True","False"], correct: 1,
+        why: "Broadcast receivers have no UI; they respond to broadcast messages, while Services handle background tasks." },
+      { q: "ContentProviders allow apps to manage and share structured data with other applications.", options: ["True","False"], correct: 0,
+        why: "Content providers encapsulate app data and expose a standard interface for other apps to query or modify it." },
+      { q: "An Activity can continue executing long-running tasks in the background after it is no longer visible.", options: ["True","False"], correct: 1,
+        why: "Long‑running operations should be performed in a Service or background thread; activities should handle UI and user interaction." },
+      { q: "In Jetpack Compose, a function must be annotated with @Composable to build UI elements.", options: ["True","False"], correct: 0,
+        why: "Only functions annotated with @Composable are treated as composables and can describe UI; regular functions cannot." },
+      { q: "The NavController should be passed into ViewModel classes to handle navigation.", options: ["True","False"], correct: 1,
+        why: "Navigation logic belongs to UI or higher‑level layers; ViewModels should remain navigation‑agnostic." },
+      { q: "Using rememberSaveable preserves state across configuration changes like device rotation.", options: ["True","False"], correct: 0,
+        why: "rememberSaveable stores state using SavedInstanceState so values survive configuration changes such as rotation." },
+      { q: "The popBackStack() function removes the current destination and returns to the previous one in the navigation stack.", options: ["True","False"], correct: 0,
+        why: "Calling popBackStack() pops the top entry off the navigation stack, revealing the previous destination." },
+      { q: "In Compose, using mutableStateOf inside a ViewModel preserves state across configuration changes.", options: ["True","False"], correct: 0,
+        why: "A ViewModel survives configuration changes, and state stored with mutableStateOf inside it persists as long as the ViewModel exists." },
+      { q: "The remember function in Compose persists state across device rotations.", options: ["True","False"], correct: 1,
+        why: "remember only retains state for the current composition; it resets when the activity is recreated after a rotation." },
+      { q: "Scaffold provides slots like topBar, bottomBar and floatingActionButton for structured layouts.", options: ["True","False"], correct: 0,
+        why: "Scaffold defines named slots such as topBar and floatingActionButton to organise the app’s user interface." },
+      { q: "Modifiers in Compose allow you to modify UI elements' size, padding, background and click actions.", options: ["True","False"], correct: 0,
+        why: "Modifiers are used to adjust layout, appearance and behaviour of composables through a fluent API." },
+      { q: "State hoisting involves moving state management down into child composables.", options: ["True","False"], correct: 1,
+        why: "State hoisting moves state up to a parent so that child composables become stateless and reusable." },
+      { q: "Using remember and rememberSaveable have the same effect on state persistence across configuration changes.", options: ["True","False"], correct: 1,
+        why: "remember does not survive configuration changes, whereas rememberSaveable persists state using SavedInstanceState." },
+      { q: "Jetpack Navigation supports nested navigation graphs to modularize different flows within an app.", options: ["True","False"], correct: 0,
+        why: "Navigation graphs can be nested to organise screens and flows within a larger application." },
+      { q: "Mobile devices typically have unlimited CPU power and battery life.", options: ["True","False"], correct: 1,
+        why: "Smartphones are resource‑constrained with limited processing power, memory, storage and battery life compared to desktops." },
+      { q: "Smartphones often include sensors like accelerometers, gyroscopes, and magnetometers.", options: ["True","False"], correct: 0,
+        why: "Common mobile hardware features include accelerometers, gyroscopes, magnetometers, GPS receivers and cameras." },
+      { q: "Most smartphone processors use a RISC architecture such as ARM.", options: ["True","False"], correct: 0,
+        why: "Many mobile devices employ ARM’s RISC architecture for energy‑efficient processing." },
+      { q: "Native apps run directly on a device's OS and can access hardware features.", options: ["True","False"], correct: 0,
+        why: "Native applications are installed on the device and can access hardware capabilities such as GPS and camera." },
+      { q: "Kotlin enforces semicolons at the end of each statement.", options: ["True","False"], correct: 1,
+        why: "Semicolons are optional in Kotlin; they are only required when multiple statements appear on one line." },
+      { q: "The Kotlin `when` expression cannot return a value.", options: ["True","False"], correct: 1,
+        why: "`when` can be used as an expression to return a value, similar to a switch‑expression." },
+      { q: "Kotlin supports extension functions that let you add methods to existing classes.", options: ["True","False"], correct: 0,
+        why: "Extension functions allow you to define new functions for existing types without inheriting from them." },
+      { q: "`if` used as an expression requires an `else` branch to produce a value.", options: ["True","False"], correct: 0,
+        why: "When used as an expression, `if` must include an `else` branch so that it can return a value for both cases." },
+      { q: "Bionic is Android's implementation of the standard C library.", options: ["True","False"], correct: 0,
+        why: "Bionic is a lightweight C library (libc) used in Android instead of glibc." },
+      { q: "OpenGL ES is used for 2D and 3D graphics on Android devices.", options: ["True","False"], correct: 0,
+        why: "OpenGL ES provides a cross‑platform API for rendering 2D and 3D graphics on mobile devices." },
+      { q: "SQLite is used for a high-level database engine on Android.", options: ["True","False"], correct: 0,
+        why: "SQLite provides a lightweight relational database engine used for local storage in many Android apps." },
+      { q: "The main UI thread in Android can safely perform long-running database queries.", options: ["True","False"], correct: 1,
+        why: "Long‑running operations should not be performed on the main UI thread; they should be offloaded to background threads." },
+      { q: "In Android, Intents are synchronous messages that block until the recipient finishes.", options: ["True","False"], correct: 1,
+        why: "Intents are asynchronous messages used to request actions; they do not block the sender." },
+      { q: "Services in Android can run in the background without a UI.", options: ["True","False"], correct: 0,
+        why: "A Service performs operations in the background without providing a user interface." },
+      { q: "The Hardware Abstraction Layer (HAL) in Android hides hardware-specific implementations from the rest of the stack.", options: ["True","False"], correct: 0,
+        why: "The HAL provides a standard interface to hardware drivers so that upper layers need not know hardware specifics." },
+      { q: "Emulation exactly replicates both hardware and software behaviours, while simulation approximates them.", options: ["True","False"], correct: 0,
+        why: "An emulator mimics the original hardware and software more accurately than a simulator, which approximates behaviour." },
+      { q: "The `R.java` class in Android provides identifiers to access resources.", options: ["True","False"], correct: 0,
+        why: "The generated R class contains identifiers for accessing resources defined in the project's res directory." },
+      { q: "The `AndroidManifest.xml` file is optional in an Android project.", options: ["True","False"], correct: 1,
+        why: "Every Android application must include a manifest file to declare components, permissions and metadata." },
+      { q: "Distributed version control systems like Git store complete copies of the project history on every developer's machine.", options: ["True","False"], correct: 0,
+        why: "In a distributed VCS, each clone contains the entire history of the repository." },
+      { q: "Jetpack Compose follows an imperative UI paradigm.", options: ["True","False"], correct: 1,
+        why: "Compose is declarative: you describe the UI as a function of state rather than mutating views imperatively." },
+      { q: "Compose's @Composable functions should be pure and free of side effects.", options: ["True","False"], correct: 0,
+        why: "Composable functions should ideally be pure; they should not produce side effects and should derive UI solely from inputs." },
+      { q: "Recomposition in Compose will always update the entire UI tree.", options: ["True","False"], correct: 1,
+        why: "Recomposition is efficient: only the parts of the UI that depend on changed state are re-executed." },
+      { q: "The `remember` function is used to persist state across recompositions within a composition.", options: ["True","False"], correct: 0,
+        why: "remember stores a value across recompositions so it is not reinitialized on every composition pass." },
+      { q: "The `mutableStateOf` function returns an observable state holder which triggers recomposition when mutated.", options: ["True","False"], correct: 0,
+        why: "mutableStateOf creates a state object; changing its value notifies Compose to recompose dependent functions." },
+      { q: "In Compose, the last modifier applied in a chain takes precedence.", options: ["True","False"], correct: 0,
+        why: "When chaining modifiers that set the same property (e.g., size), the last one overrides previous modifiers." },
+      { q: "Navigation popUpTo removes multiple destinations until the specified one remains on the stack.", options: ["True","False"], correct: 0,
+        why: "Using popUpTo with a route removes destinations from the stack until reaching the specified route." },
+      { q: "`rememberSaveable` uses SavedInstanceState to persist state across configuration changes.", options: ["True","False"], correct: 0,
+        why: "rememberSaveable leverages SavedInstanceState to store and restore values when the activity is recreated." },
+      { q: "A ViewModel instance is destroyed when the associated activity's process is killed or when the navigation graph scope is removed.", options: ["True","False"], correct: 0,
+        why: "ViewModels survive configuration changes but are cleared when the host’s lifecycle or navigation graph is destroyed." },
+      { q: "Hoisting state means moving state management to a more global scope for reuse and a single source of truth.", options: ["True","False"], correct: 0,
+        why: "Hoisting promotes unidirectional data flow by lifting state to a common ancestor and passing it down with callbacks." },
+      { q: "PendingIntent can be used to trigger a deep link to a destination within the app from outside the app.", options: ["True","False"], correct: 0,
+        why: "You can wrap a NavDeepLinkBuilder result in a PendingIntent to launch a specific destination from notifications or widgets." }
+    ];
+    // --- Quiz Logic (DO NOT MODIFY) ---
+    const quizEl = document.getElementById('quiz');
+    const scoreEl = document.getElementById('score');
+    const progressEl = document.getElementById('progress');
+    const percentEl = document.getElementById('percent');
+    const resetBtn = document.getElementById('resetBtn');
+    const revealBtn = document.getElementById('revealBtn');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    let state = { score: 0, answered: 0 };
+    let currentQuestions = [];
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    function buildQuestions() {
+      return shuffle(QUESTIONS).map(q => (({
+        q: q.q,
+        options: shuffle(q.options.map((txt, i) => ({ txt, isCorrect: i === q.correct })) ),
+        correct: 0,
+        why: q.why,
+        __answered: false
+      }))).map(item => {
+        item.correct = item.options.findIndex(o => o.isCorrect);
+        item.options = item.options.map(o => o.txt);
+        return item;
+      });
+    }
+    function render() {
+      quizEl.innerHTML = '';
+      currentQuestions.forEach((item, qi) => {
+        const card = document.createElement('div');
+        card.className = 'qcard';
+        const head = document.createElement('div');
+        head.className = 'qhead';
+        const titleEl = document.createElement('p');
+        titleEl.className = 'qtitle';
+        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = `Q${qi + 1}`;
+        head.appendChild(titleEl);
+        head.appendChild(badge);
+        card.appendChild(head);
+        const opts = document.createElement('div');
+        opts.className = 'opts';
+        item.options.forEach((opt, oi) => {
+          const row = document.createElement('div');
+          row.className = 'opt';
+          row.setAttribute('data-q', qi);
+          row.setAttribute('data-o', oi);
+          const letter = document.createElement('div');
+          letter.className = 'letter';
+          letter.textContent = String.fromCharCode(65 + oi);
+          const span = document.createElement('span');
+          span.textContent = opt;
+          row.appendChild(letter);
+          row.appendChild(span);
+          row.addEventListener('click', onChoose);
+          opts.appendChild(row);
+        });
+        const exp = document.createElement('div');
+        exp.className = 'exp';
+        exp.hidden = true;
+        exp.innerHTML = `<strong>Explanation:</strong> ${item.why}`;
+        card.appendChild(opts);
+        card.appendChild(exp);
+        quizEl.appendChild(card);
+      });
+      updateStats();
+    }
+    function onChoose(e) {
+      const btn = e.currentTarget;
+      const qIndex = +btn.getAttribute('data-q');
+      const oIndex = +btn.getAttribute('data-o');
+      const card = btn.closest('.qcard');
+      const exp = card.querySelector('.exp');
+      const data = currentQuestions[qIndex];
+      if (data.__answered) return;
+      const options = card.querySelectorAll('.opt');
+      options.forEach(b => b.classList.add('disabled'));
+      data.__answered = true;
+      state.answered++;
+      if (oIndex === data.correct) {
+        btn.classList.add('correct');
+        state.score++;
+      } else {
+        btn.classList.add('wrong');
+        options[data.correct].classList.add('correct');
+      }
+      exp.hidden = false;
+      updateStats();
+    }
+    function updateStats() {
+      scoreEl.textContent = `Score: ${state.score}`;
+      progressEl.textContent = `Answered: ${state.answered} / ${currentQuestions.length}`;
+      const percent = currentQuestions.length ? Math.round((state.score / currentQuestions.length) * 100) : 0;
+      percentEl.textContent = `${percent}%`;
+    }
+    function init() {
+      currentQuestions = buildQuestions();
+      render();
+    }
+    resetBtn.addEventListener('click', () => {
+      state = { score: 0, answered: 0 };
+      init();
+    });
+    revealBtn.addEventListener('click', () => {
+      document.querySelectorAll('.exp').forEach(exp => exp.hidden = false);
+      document.querySelectorAll('.opt').forEach((row, index) => {
+        const qIdx = +row.getAttribute('data-q');
+        const oIdx = +row.getAttribute('data-o');
+        const data = currentQuestions[qIdx];
+        row.classList.add('disabled');
+        if (oIdx === data.correct) {
+          row.classList.add('correct');
+        }
+      });
+    });
+    shuffleBtn.addEventListener('click', () => {
+      state = { score: 0, answered: 0 };
+      currentQuestions = buildQuestions();
+      render();
+    });
+    init();
+  </script>
+</body>
+</html>
