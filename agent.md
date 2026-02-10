@@ -39,6 +39,7 @@ Full details and customization options below ⬇️
 - 🔒 **One attempt per question** – Questions lock after first answer
 - 🔄 **Shuffle mode** – Randomize questions and options
 - 👁️ **Reveal all answers** – Preview correct answers without affecting score
+- 💻 **Code block support** – Syntax-highlighted code with line numbers for programming quizzes
 - 🎯 **Responsive design** – Works on desktop and mobile
 - 💾 **No backend required** – Pure client-side, works offline
 
@@ -849,6 +850,14 @@ For a minimal light-themed index without tabs:
    - Explain why the correct answer is right
    - Briefly explain why wrong answers are incorrect (optional)
    - Keep it concise but informative
+   - **For code questions:** Use `[Line X]` or `[Lines X-Y]` format to reference specific lines
+
+4. **Code Snippets** (if applicable)
+   - Always add line numbers (1, 2, 3, etc.) at the start of each line
+   - Use `<pre class="code-block">...</pre>` for proper formatting
+   - Reference specific lines in explanations using `[Line X]` format
+   - Keep code snippets focused and relevant to the question
+   - See the "[Including Code Snippets in Questions](#2-including-code-snippets-in-questions)" section for detailed examples
 
 ---
 
@@ -995,18 +1004,22 @@ When your quiz question includes a code snippet (for example, Kotlin, Java or Je
 
 1. **Wrap the code in a `<pre class="code-block">…</pre>` tag inside the `q` string.**  The quiz template's CSS defines the `.code-block` class with a dark background, light text and monospaced font. This improves readability and visually distinguishes code from regular text.
 
-2. **Preserve indentation and line breaks.**  Within the `<pre>` tag, use `\n` characters in the JSON string to represent line breaks. Maintain the same indentation as the original source to avoid confusing layout.
+2. **Add line numbers to code snippets.**  Prefix each line of code with its line number (1, 2, 3, etc.) followed by two spaces. This helps students identify specific parts of the code and makes explanations clearer. Line numbers should be aligned consistently (single-digit numbers can have extra spacing if needed for multi-line code blocks).
 
-3. **Separate the prompt from the code.**  Place the code snippet at the start of the `q` string, then add a blank line and the actual question. This ensures the code and the question text are clearly separated when rendered.
+3. **Reference line numbers in explanations using [Line X] format.**  In the `why` field, use square brackets around line references like `[Line 3]`, `[Line 5]`, or `[Lines 2-4]` when explaining the answer. This makes it immediately clear which part of the code you're discussing and helps students follow along.
 
-4. **Focus on relevant code.**  Include only the parts of a program necessary to answer the question. Avoid unrelated imports, lengthy comments or boilerplate that distracts from the concept being tested.
+4. **Preserve indentation and line breaks.**  Within the `<pre>` tag, use `\n` characters in the JSON string to represent line breaks. Maintain the same indentation as the original source to avoid confusing layout. Line numbers should not affect the code indentation.
 
-5. **Ensure exactly one correct answer.**  As with all MCQs, provide plausible distractors for the `options` array but make sure there is exactly one correct choice corresponding to the code.
+5. **Separate the prompt from the code.**  Place the code snippet at the start of the `q` string, then add a blank line and the actual question. This ensures the code and the question text are clearly separated when rendered.
 
-**Example with styled code block:**
+6. **Focus on relevant code.**  Include only the parts of a program necessary to answer the question. Avoid unrelated imports, lengthy comments or boilerplate that distracts from the concept being tested.
+
+7. **Ensure exactly one correct answer.**  As with all MCQs, provide plausible distractors for the `options` array but make sure there is exactly one correct choice corresponding to the code.
+
+**Example with styled code block and line numbers:**
 ```javascript
 {
-  q: "<pre class=\"code-block\">fun Greeting(name: String) {\n    val output = \"Hello $name!\"\n    Text(text = output)\n}</pre>\nIs the Greeting() function a composable function?",
+  q: "<pre class=\"code-block\">1  fun Greeting(name: String) {\n2      val output = \"Hello $name!\"\n3      Text(text = output)\n4  }</pre>\nIs the Greeting() function a composable function?",
   options: [
     "Maybe",
     "No",
@@ -1014,17 +1027,32 @@ When your quiz question includes a code snippet (for example, Kotlin, Java or Je
     "Yes"
   ],
   correct: 1,
-  why: "The Greeting() function is not annotated with @Composable, so it is a regular Kotlin function."
+  why: "[Line 1] declares the function without the @Composable annotation. Even though [line 3] calls Text (a composable), the function itself is not composable without the annotation."
+}
+```
+
+**Another example with multi-line code:**
+```javascript
+{
+  q: "<pre class=\"code-block\">1  @Composable\n2  fun CounterExample() {\n3      var count by remember { mutableStateOf(0) }\n4      Button(onClick = { count++ }) {\n5          Text(\"Count: $count\")\n6      }\n7  }</pre>\nAfter pressing the button three times, what text is shown?",
+  options: [
+    "Count: 3",
+    "Count: 0", 
+    "Count: 1",
+    "The app crashes"
+  ],
+  correct: 0,
+  why: "[Line 3] uses remember with mutableStateOf to persist count across recompositions. [Line 4] increments count on each click. After three clicks, count = 3, and [line 5] displays \"Count: 3\"."
 }
 ```
 
 **Simple example (basic formatting):**
 ```javascript
 { 
-  q: "What does this code output?<br><pre>for i in range(3):\n    print(i)</pre>",
+  q: "What does this code output?<br><pre class=\"code-block\">1  for i in range(3):\n2      print(i)</pre>",
   options: ["0 1 2", "1 2 3", "0 1 2 3", "Error"],
   correct: 0,
-  why: "range(3) generates 0, 1, 2."
+  why: "[Line 1] uses range(3) which generates 0, 1, 2. [Line 2] prints each value."
 }
 ```
 
@@ -1062,10 +1090,12 @@ When your quiz question includes a code snippet (for example, Kotlin, Java or Je
 ## Tips for Different Subjects
 
 ### Computer Science / Programming
-- Include code snippets
+- Include code snippets with line numbers (use `<pre class="code-block">` formatting)
+- Reference specific lines in explanations using `[Line X]` format
 - Test algorithmic thinking
 - Cover time/space complexity
 - Include debugging questions
+- Use realistic code examples from the course material
 
 ### Mathematics
 - Use clear notation
@@ -1432,13 +1462,23 @@ Print or bookmark this section for quick access while creating quizzes!
 
 ### Essential Code Snippets
 
-**Question Template:**
+**Question Template (Standard):**
 ```javascript
 { 
   q: "Your question text?",
   options: ["Option A", "Option B", "Option C", "Option D"],
   correct: 0,  // 0=A, 1=B, 2=C, 3=D
   why: "Explanation of the correct answer."
+}
+```
+
+**Question Template with Code Block:**
+```javascript
+{ 
+  q: "<pre class=\"code-block\">1  fun main() {\n2      println(\"Hello\")\n3  }</pre>\nWhat does this code print?",
+  options: ["Hello", "main", "Nothing", "Error"],
+  correct: 0,
+  why: "[Line 2] uses println to output \"Hello\" to the console."
 }
 ```
 
