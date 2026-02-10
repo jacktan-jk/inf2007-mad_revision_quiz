@@ -42,6 +42,16 @@
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
     color:#111827; }
     .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -464,6 +474,28 @@
     ],
     "correct": 0,
     "why": "The `let` scope function performs an operation on a nullable object only when it is non‑null and returns the result【987723225263861†L152-L166】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun main() {\n    var x = 5\n    x = x * 2\n    val y = x\n    println(y)\n}</pre>\nWhat will be printed when this Kotlin program runs?",
+    "options": [
+      "5",
+      "10",
+      "20",
+      "It will throw a reassignment error"
+    ],
+    "correct": 1,
+    "why": "A `var` can be reassigned while a `val` is initialized only once. In this program x becomes 10, y is assigned that value and printed, so the output is 10【987723225263861†L24-L31】."
+  },
+  {
+    "q": "<pre class=\"code-block\">fun greet(name: String) {\n    println(name.length)\n}\nfun main() {\n    val nullableName: String? = null\n    greet(nullableName)\n}</pre>\nWhat happens when compiling this Kotlin program?",
+    "options": [
+      "It fails to compile because greet() expects a non‑null String",
+      "It prints 0",
+      "It prints null",
+      "It throws a NullPointerException at runtime"
+    ],
+    "correct": 0,
+    "why": "Kotlin’s type system forbids passing a nullable `String?` to a function expecting a non‑nullable parameter, so the compiler reports a type mismatch【987723225263861†L44-L54】."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
@@ -506,7 +538,8 @@
         head.className = 'qhead';
         const titleEl = document.createElement('p');
         titleEl.className = 'qtitle';
-        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
         const badge = document.createElement('span');
         badge.className = 'badge';
         badge.textContent = `Q${qi + 1}`;

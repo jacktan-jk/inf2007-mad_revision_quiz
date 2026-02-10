@@ -42,6 +42,16 @@
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
     color:#111827; }
     .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -321,6 +331,17 @@
     ],
     "correct": 0,
     "why": "During recomposition, Compose tracks which composables were invoked and skips recomposing those whose inputs haven't changed【543652055253700†L216-L221】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun Counter() {\n    var count by remember { mutableStateOf(1) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nIf the user clicks the button twice, what text appears on the button?",
+    "options": [
+      "Count: 1",
+      "Count: 2",
+      "Count: 3",
+      "Count: 0"
+    ],
+    "correct": 2,
+    "why": "The initial value of count is 1. Each click increments count by 1, so after two clicks the value is 3 and the button displays \"Count: 3\"【543652055253700†L279-L282】."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
@@ -363,7 +384,8 @@
         head.className = 'qhead';
         const titleEl = document.createElement('p');
         titleEl.className = 'qtitle';
-        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
         const badge = document.createElement('span');
         badge.className = 'badge';
         badge.textContent = `Q${qi + 1}`;

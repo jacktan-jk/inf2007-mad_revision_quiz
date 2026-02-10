@@ -42,6 +42,16 @@
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
     color:#111827; }
     .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -310,6 +320,17 @@
     ],
     "correct": 0,
     "why": "Hoisting state to the parent makes a composable more reusable and testable because it no longer owns its own state【543652055253700†L286-L296】."
+  },
+  {
+    "q": "<pre class=\"code-block\">@Composable\nfun ParentScreen() {\n    var counter by rememberSaveable { mutableStateOf(0) }\n    Column {\n        CounterComponent(counter, { counter = it })\n        Text(\"Parent Counter: $counter\")\n    }\n}\n@Composable\nfun CounterComponent(counter: Int, onCounterChange: (Int) -> Unit) {\n    Button(onClick = { onCounterChange(counter + 1) }) {\n        Text(\"Increment: $counter\")\n    }\n}</pre>\nIf the user clicks the Increment button three times, what will be displayed?",
+    "options": [
+      "Increment: 0, Parent Counter: 3",
+      "Increment: 3, Parent Counter: 0",
+      "Increment: 3, Parent Counter: 3",
+      "Increment: 0, Parent Counter: 0"
+    ],
+    "correct": 2,
+    "why": "Clicking the button calls onCounterChange with the incremented value, updating the state in ParentScreen. After three clicks both counter and the argument passed to CounterComponent are 3, so both texts show 3【142401871453801†L14-L26】."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
@@ -352,7 +373,8 @@
         head.className = 'qhead';
         const titleEl = document.createElement('p');
         titleEl.className = 'qtitle';
-        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
         const badge = document.createElement('span');
         badge.className = 'badge';
         badge.textContent = `Q${qi + 1}`;

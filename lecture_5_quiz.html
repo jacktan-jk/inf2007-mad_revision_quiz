@@ -42,6 +42,16 @@
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
     color:#111827; }
     .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -288,6 +298,17 @@
     ],
     "correct": 0,
     "why": "The slides note that rememberSaveable works well for primitives but fails on complex logic or navigation, which should be managed by a ViewModel【285262186379052†L124-L130】."
+  },
+  {
+    "q": "<pre class=\"code-block\">navController.navigate(\"details\")\nnavController.navigate(\"profile\")\nnavController.popBackStack(\"details\", inclusive = true)</pre>\nWhat will be the resulting back stack?",
+    "options": [
+      "The user is navigated to HomeScreen and the entire back stack is cleared",
+      "The Details screen is removed and Profile becomes the top destination",
+      "Both Details and Profile are removed, and the user navigates back to the destination before Details",
+      "The Details and Profile screens are removed, leaving only HomeScreen"
+    ],
+    "correct": 3,
+    "why": "popBackStack(\"details\", inclusive = true) removes entries up to and including the \"details\" destination. Since the stack was [Home, details, profile], both profile and details are removed, leaving Home on top【285262186379052†L46-L53】."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
@@ -330,7 +351,8 @@
         head.className = 'qhead';
         const titleEl = document.createElement('p');
         titleEl.className = 'qtitle';
-        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
         const badge = document.createElement('span');
         badge.className = 'badge';
         badge.textContent = `Q${qi + 1}`;

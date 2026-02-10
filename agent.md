@@ -155,6 +155,7 @@ project-root/
     .letter { width:28px; height:28px; border-radius:999px; border:1px solid #e5e7eb; display:grid; place-items:center; font-weight:700; }
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px; color:#111827; }
     .exp strong { color:#065f46 }
+    .code-block { background:#1e293b; color:#e2e8f0; padding:12px; border-radius:8px; overflow-x:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:14px; line-height:1.6; margin:8px 0; }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -988,7 +989,36 @@ const QUESTIONS = [
 }
 ```
 
-### 2. Code Snippets in Questions
+### 2. Including Code Snippets in Questions
+
+When your quiz question includes a code snippet (for example, Kotlin, Java or Jetpack Compose code), follow these guidelines to ensure it displays correctly and is easy for students to read:
+
+1. **Wrap the code in a `<pre class="code-block">…</pre>` tag inside the `q` string.**  The quiz template's CSS defines the `.code-block` class with a dark background, light text and monospaced font. This improves readability and visually distinguishes code from regular text.
+
+2. **Preserve indentation and line breaks.**  Within the `<pre>` tag, use `\n` characters in the JSON string to represent line breaks. Maintain the same indentation as the original source to avoid confusing layout.
+
+3. **Separate the prompt from the code.**  Place the code snippet at the start of the `q` string, then add a blank line and the actual question. This ensures the code and the question text are clearly separated when rendered.
+
+4. **Focus on relevant code.**  Include only the parts of a program necessary to answer the question. Avoid unrelated imports, lengthy comments or boilerplate that distracts from the concept being tested.
+
+5. **Ensure exactly one correct answer.**  As with all MCQs, provide plausible distractors for the `options` array but make sure there is exactly one correct choice corresponding to the code.
+
+**Example with styled code block:**
+```javascript
+{
+  q: "<pre class=\"code-block\">fun Greeting(name: String) {\n    val output = \"Hello $name!\"\n    Text(text = output)\n}</pre>\nIs the Greeting() function a composable function?",
+  options: [
+    "Maybe",
+    "No",
+    "No idea",
+    "Yes"
+  ],
+  correct: 1,
+  why: "The Greeting() function is not annotated with @Composable, so it is a regular Kotlin function."
+}
+```
+
+**Simple example (basic formatting):**
 ```javascript
 { 
   q: "What does this code output?<br><pre>for i in range(3):\n    print(i)</pre>",
@@ -1434,6 +1464,110 @@ Print or bookmark this section for quick access while creating quizzes!
 
 | What to Change | Where | Example |
 |----------------|-------|---------|
+| Quiz title | `<h1>` in quiz file | `<h1>Chapter 3 Quiz</h1>` |
+| Subject info | `.sub` div in quiz | `CS 101 • Fall 2024` |
+| Primary color | `:root --accent` | `#2563eb` (blue) |
+| Questions | `QUESTIONS` array | Add/edit question objects |
+| Index tabs | Tab buttons in index | `<button>Unit 1</button>` |
+| Quiz listings | `QUIZZES` object | Add quiz config objects |
+
+### File Locations Cheat Sheet
+
+```
+project-root/
+├── index.html              ← Landing page (from "Complete Index HTML Template")
+├── lecture_1_quiz.html     ← Quiz files (from "Complete Quiz HTML Template")
+├── lecture_2_quiz.html
+└── notes/
+    └── topic1.md           ← Optional markdown notes
+```
+
+### Testing Checklist (Fast)
+
+- [ ] Questions display correctly
+- [ ] Clicking answer shows correct/wrong
+- [ ] Score updates properly
+- [ ] Shuffle randomizes questions
+- [ ] Reset clears scores
+- [ ] Links work from index
+- [ ] Mobile view looks good
+
+### Deployment in 3 Steps
+
+**GitHub Pages:**
+```bash
+git init
+git add .
+git commit -m "Add quizzes"
+git push
+# Enable Pages in repo settings
+```
+
+**Or just:** Drag folder to [netlify.com](https://netlify.com)
+
+---
+
+### Need Help?
+
+- **Questions won't show**: Check JavaScript console for errors
+- **Links broken**: Verify file names match exactly
+- **Styling issues**: Check for missing closing tags
+- **Score wrong**: Ensure `correct` index matches option position
+
+---
+-------------|-------|---------|
+| Quiz title | `<h1>` in quiz file | `<h1>Chapter 3 Quiz</h1>` |
+| Subject info | `.sub` div in quiz | `CS 101 • Fall 2024` |
+| Primary color | `:root --accent` | `#2563eb` (blue) |
+| Questions | `QUESTIONS` array | Add/edit question objects |
+| Index tabs | Tab buttons in index | `<button>Unit 1</button>` |
+| Quiz listings | `QUIZZES` object | Add quiz config objects |
+
+### File Locations Cheat Sheet
+
+```
+project-root/
+├── index.html              ← Landing page (from "Complete Index HTML Template")
+├── lecture_1_quiz.html     ← Quiz files (from "Complete Quiz HTML Template")
+├── lecture_2_quiz.html
+└── notes/
+    └── topic1.md           ← Optional markdown notes
+```
+
+### Testing Checklist (Fast)
+
+- [ ] Questions display correctly
+- [ ] Clicking answer shows correct/wrong
+- [ ] Score updates properly
+- [ ] Shuffle randomizes questions
+- [ ] Reset clears scores
+- [ ] Links work from index
+- [ ] Mobile view looks good
+
+### Deployment in 3 Steps
+
+**GitHub Pages:**
+```bash
+git init
+git add .
+git commit -m "Add quizzes"
+git push
+# Enable Pages in repo settings
+```
+
+**Or just:** Drag folder to [netlify.com](https://netlify.com)
+
+---
+
+### Need Help?
+
+- **Questions won't show**: Check JavaScript console for errors
+- **Links broken**: Verify file names match exactly
+- **Styling issues**: Check for missing closing tags
+- **Score wrong**: Ensure `correct` index matches option position
+
+---
+-------------|-------|---------|
 | Quiz title | `<h1>` in quiz file | `<h1>Chapter 3 Quiz</h1>` |
 | Subject info | `.sub` div in quiz | `CS 101 • Fall 2024` |
 | Primary color | `:root --accent` | `#2563eb` (blue) |

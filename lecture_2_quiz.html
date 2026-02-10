@@ -42,6 +42,16 @@
     .exp { margin-top:10px; border-top:1px dashed #e5e7eb; padding-top:10px;
     color:#111827; }
     .exp strong { color:#065f46 }
+    /* Code block styling: dark background and monospace font */
+    pre.code-block {
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      margin: 12px 0;
+    }
     footer { text-align:center; color:#6b7280; padding:30px 12px; }
     details > summary { cursor:pointer; }
   </style>
@@ -376,6 +386,17 @@
     ],
     "correct": 0,
     "why": "Threads share a process's virtual address space and resources, whereas processes have separate memory spaces【594818497736741†L73-L77】."
+  },
+  {
+    "q": "<pre class=\"code-block\">val intent = Intent(this, DetailActivity::class.java)\nstartActivity(intent)</pre>\nWhat does this Kotlin code accomplish in an Android Activity?",
+    "options": [
+      "It explicitly sends a broadcast to the system",
+      "It starts the DetailActivity screen",
+      "It declares and registers a new Service",
+      "It creates a ContentProvider instance"
+    ],
+    "correct": 1,
+    "why": "An explicit Intent constructed with a context and a target class launches the specified Activity when passed to startActivity(). This starts DetailActivity【594818497736741†L103-L116】."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
@@ -418,7 +439,8 @@
         head.className = 'qhead';
         const titleEl = document.createElement('p');
         titleEl.className = 'qtitle';
-        titleEl.textContent = `${qi + 1}. ${item.q}`;
+        // Render question text as HTML to support code snippets with <pre> tags
+        titleEl.innerHTML = `${qi + 1}. ${item.q}`;
         const badge = document.createElement('span');
         badge.className = 'badge';
         badge.textContent = `Q${qi + 1}`;
