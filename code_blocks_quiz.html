@@ -80,7 +80,7 @@
   <script>
     const QUESTIONS = [
   {
-    "q": "<pre class=\"code-block\">fun main() {\n    var x = 10\n    x += 5\n    val y = x\n    println(y)\n}</pre>\nWhat is printed by this Kotlin program?",
+    "q": "<pre class=\"code-block\">1  fun main() {\n2      var x = 10\n3      x += 5\n4      val y = x\n5      println(y)\n6  }</pre>\nWhat is printed by this Kotlin program?",
     "options": [
       "10",
       "15",
@@ -88,10 +88,10 @@
       "Compilation error"
     ],
     "correct": 1,
-    "why": "Using var allows reassignment, and val y holds the final value of x (15) which is printed."
+    "why": "[Line 2] declares var x = 10. [Line 3] adds 5 to x (x += 5), making it 15. [Line 4] assigns this value to val y. [Line 5] prints y, which is 15."
   },
   {
-    "q": "<pre class=\"code-block\">fun safeLength(str: String?): Int {\n    return str?.length ?: 0\n}\nfun main() {\n    val name: String? = null\n    println(safeLength(name))\n}</pre>\nWhat is printed when this code runs?",
+    "q": "<pre class=\"code-block\">1  fun safeLength(str: String?): Int {\n2      return str?.length ?: 0\n3  }\n4  fun main() {\n5      val name: String? = null\n6      println(safeLength(name))\n7  }</pre>\nWhat is printed when this code runs?",
     "options": [
       "0",
       "null",
@@ -99,10 +99,10 @@
       "Throws NullPointerException"
     ],
     "correct": 0,
-    "why": "The safe call (?.) returns null and the Elvis operator returns 0 when null, so 0 is printed."
+    "why": "[Line 5] sets name to null. [Line 6] calls safeLength(null). In [line 2], the safe call (?.) returns null and the Elvis operator (?:) returns 0, so 0 is printed."
   },
   {
-    "q": "<pre class=\"code-block\">fun evaluate(n: Int): String {\n    return when (n) {\n        1 -> \"One\"\n        2 -> \"Two\"\n        else -> \"Other\"\n    }\n}\nfun main() {\n    println(evaluate(2))\n}</pre>\nWhat does this program print?",
+    "q": "<pre class=\"code-block\">1  fun evaluate(n: Int): String {\n2      return when (n) {\n3          1 -> \"One\"\n4          2 -> \"Two\"\n5          else -> \"Other\"\n6      }\n7  }\n8  fun main() {\n9      println(evaluate(2))\n10 }</pre>\nWhat does this program print?",
     "options": [
       "One",
       "Two",
@@ -110,10 +110,10 @@
       "Compilation error"
     ],
     "correct": 1,
-    "why": "The when expression returns \"Two\" when the input is 2."
+    "why": "[Line 9] calls evaluate(2). In the when expression ([lines 2-6]), [line 4] matches n == 2 and returns \"Two\"."
   },
   {
-    "q": "<pre class=\"code-block\">fun main() {\n    val sum: (Int, Int) -> Int = { a, b -> a + b }\n    println(sum(3, 4))\n}</pre>\nWhat is printed by this code?",
+    "q": "<pre class=\"code-block\">1  fun main() {\n2      val sum: (Int, Int) -> Int = { a, b -> a + b }\n3      println(sum(3, 4))\n4  }</pre>\nWhat is printed by this code?",
     "options": [
       "7",
       "3",
@@ -121,10 +121,10 @@
       "Compilation error"
     ],
     "correct": 0,
-    "why": "A lambda expression sums its two arguments; sum(3, 4) is 7."
+    "why": "[Line 2] defines a lambda that takes two Ints and returns their sum. [Line 3] calls sum(3, 4), which evaluates to 3 + 4 = 7."
   },
   {
-    "q": "<pre class=\"code-block\">class BankAccount(private var balance: Int) {\n    fun deposit(amount: Int) {\n        balance += amount\n    }\n    fun getBalance(): Int = balance\n}\nfun main() {\n    val account = BankAccount(100)\n    account.deposit(50)\n    println(account.getBalance())\n}</pre>\nWhat value is printed?",
+    "q": "<pre class=\"code-block\">1  class BankAccount(private var balance: Int) {\n2      fun deposit(amount: Int) {\n3          balance += amount\n4      }\n5      fun getBalance(): Int = balance\n6  }\n7  fun main() {\n8      val account = BankAccount(100)\n9      account.deposit(50)\n10     println(account.getBalance())\n11 }</pre>\nWhat value is printed?",
     "options": [
       "100",
       "50",
@@ -132,10 +132,10 @@
       "Compilation error"
     ],
     "correct": 2,
-    "why": "deposit() updates the private balance property and getBalance() returns it. 100 + 50 = 150."
+    "why": "[Line 8] creates an account with balance = 100. [Line 9] calls deposit(50), and [line 3] adds 50 to balance (100 + 50 = 150). [Line 10] prints getBalance() which returns 150 ([line 5])."
   },
   {
-    "q": "<pre class=\"code-block\">fun main() {\n    val text: String? = \"Compose\"\n    text?.let {\n        println(it.uppercase())\n    }\n}</pre>\nWhat is printed by this program?",
+    "q": "<pre class=\"code-block\">1  fun main() {\n2      val text: String? = \"Compose\"\n3      text?.let {\n4          println(it.uppercase())\n5      }\n6  }</pre>\nWhat is printed by this program?",
     "options": [
       "compose",
       "COMPOSE",
@@ -143,10 +143,10 @@
       "Nothing is printed"
     ],
     "correct": 1,
-    "why": "let executes only when the receiver is non-null; it prints the uppercase version of the string."
+    "why": "[Line 2] sets text to \"Compose\" (non-null). [Line 3] uses safe call (?.) with let, which executes since text is not null. [Line 4] prints it.uppercase(), converting \"Compose\" to \"COMPOSE\"."
   },
   {
-    "q": "<pre class=\"code-block\">val intent = Intent(this, ProfileActivity::class.java)\nstartActivity(intent)</pre>\nWhat does this code do in an Android Activity?",
+    "q": "<pre class=\"code-block\">1  val intent = Intent(this, ProfileActivity::class.java)\n2  startActivity(intent)</pre>\nWhat does this code do in an Android Activity?",
     "options": [
       "It starts ProfileActivity",
       "It sends a broadcast",
@@ -154,10 +154,10 @@
       "It registers a ContentProvider"
     ],
     "correct": 0,
-    "why": "An explicit Intent with a context and target class launches the ProfileActivity when passed to startActivity()."
+    "why": "[Line 1] creates an explicit Intent targeting ProfileActivity. [Line 2] calls startActivity() which launches the ProfileActivity."
   },
   {
-    "q": "<pre class=\"code-block\">val intentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)\nval receiver = object : BroadcastReceiver() {\n    override fun onReceive(context: Context, intent: Intent?) {\n        println(\"Airplane mode changed\")\n    }\n}\nregisterReceiver(receiver, intentFilter)</pre>\nWhich component listens for the airplane mode change?",
+    "q": "<pre class=\"code-block\">1  val intentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)\n2  val receiver = object : BroadcastReceiver() {\n3      override fun onReceive(context: Context, intent: Intent?) {\n4          println(\"Airplane mode changed\")\n5      }\n6  }\n7  registerReceiver(receiver, intentFilter)</pre>\nWhich component listens for the airplane mode change?",
     "options": [
       "Activity",
       "Service",
@@ -165,10 +165,10 @@
       "ContentProvider"
     ],
     "correct": 2,
-    "why": "The code creates an anonymous BroadcastReceiver to handle the AIRPLANE_MODE_CHANGED broadcast."
+    "why": "[Line 2] creates an anonymous BroadcastReceiver object. [Line 3] overrides onReceive() which will be called when the airplane mode changes. [Line 7] registers this receiver to listen for the intent filter created in [line 1]."
   },
   {
-    "q": "<pre class=\"code-block\">fun marking(homework: String, compute: () -> Int) {\n    println(\"$homework result:\")\n    val result = compute()\n    println(if (result >= 50) \"You pass!\" else \"You fail!\")\n}\nfun main() {\n    marking(\"Lab 1\") {\n        val q1 = 4\n        val q2 = 1\n        (q1 + q2) * 10 // Return value implicitly\n    }\n}</pre>\nWhat does this program output?",
+    "q": "<pre class=\"code-block\">1  fun marking(homework: String, compute: () -> Int) {\n2      println(\"$homework result:\")\n3      val result = compute()\n4      println(if (result >= 50) \"You pass!\" else \"You fail!\")\n5  }\n6  fun main() {\n7      marking(\"Lab 1\") {\n8          val q1 = 4\n9          val q2 = 1\n10         (q1 + q2) * 10 // Return value implicitly\n11     }\n12 }</pre>\nWhat does this program output?",
     "options": [
       "error",
       "Lab 1 result:\nYou fail!",
@@ -176,10 +176,10 @@
       "You pass!"
     ],
     "correct": 2,
-    "why": "(4+1)*10 = 50 so the conditional prints \"You pass!\" after \"Lab 1 result:\"."
+    "why": "[Line 7] calls marking with a lambda. [Line 2] prints \"Lab 1 result:\". [Line 3] executes the lambda: [lines 8-10] compute (4+1)*10 = 50. [Line 4] checks if 50 >= 50 (true) and prints \"You pass!\"."
   },
   {
-    "q": "<pre class=\"code-block\">fun Greeting(name: String) {\n    Text(\"Hello $name\")\n}</pre>\nIs Greeting() a composable function?",
+    "q": "<pre class=\"code-block\">1  fun Greeting(name: String) {\n2      Text(\"Hello $name\")\n3  }</pre>\nIs Greeting() a composable function?",
     "options": [
       "Yes",
       "No",
@@ -187,10 +187,10 @@
       "Only if called inside @Composable"
     ],
     "correct": 1,
-    "why": "A function must be annotated with @Composable to be treated as a composable; Greeting lacks that annotation."
+    "why": "[Line 1] declares the function without the @Composable annotation. Even though [line 2] calls Text (a composable), the function itself is not composable without the annotation."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun CounterExample() {\n    var count = 0\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nWhat happens when the user clicks the button?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun CounterExample() {\n3      var count = 0\n4      Button(onClick = { count++ }) {\n5          Text(\"Count: $count\")\n6      }\n7  }</pre>\nWhat happens when the user clicks the button?",
     "options": [
       "Count increments and displays increasing numbers",
       "Count never changes because the variable is not remembered",
@@ -198,10 +198,10 @@
       "Button becomes disabled"
     ],
     "correct": 1,
-    "why": "Without remember, count is a local variable that resets on every recomposition; clicking triggers recomposition so the displayed value remains 0."
+    "why": "[Line 3] declares count without remember. [Line 4] increments it on click, triggering recomposition. Since count isn't remembered, [line 3] resets it to 0 on each recomposition, so [line 5] always displays \"Count: 0\"."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun CounterExample2() {\n    var count by remember { mutableStateOf(0) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nAfter pressing the button three times, what text is shown?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun CounterExample2() {\n3      var count by remember { mutableStateOf(0) }\n4      Button(onClick = { count++ }) {\n5          Text(\"Count: $count\")\n6      }\n7  }</pre>\nAfter pressing the button three times, what text is shown?",
     "options": [
       "Count: 3",
       "Count: 0",
@@ -209,10 +209,10 @@
       "The app crashes"
     ],
     "correct": 0,
-    "why": "remember with mutableStateOf stores the state across recompositions; each click increments the counter so after three clicks it displays 3."
+    "why": "[Line 3] uses remember with mutableStateOf to persist count across recompositions. [Line 4] increments count on each click. After three clicks, count = 3, and [line 5] displays \"Count: 3\"."
   },
   {
-    "q": "<pre class=\"code-block\">Box(\n    modifier = Modifier.size(100.dp).size(200.dp)\n) {\n    Text(\"Hello\")\n}</pre>\nWhat is the final size of the Box?",
+    "q": "<pre class=\"code-block\">1  Box(\n2      modifier = Modifier.size(100.dp).size(200.dp)\n3  ) {\n4      Text(\"Hello\")\n5  }</pre>\nWhat is the final size of the Box?",
     "options": [
       "100 dp",
       "200 dp",
@@ -220,10 +220,10 @@
       "It has zero size"
     ],
     "correct": 1,
-    "why": "When chaining size modifiers, the last one wins; the Box ends up sized at 200 dp."
+    "why": "[Line 2] chains two size modifiers. When chaining modifiers, the last one wins. The second .size(200.dp) overrides the first .size(100.dp), so the Box is 200 dp."
   },
   {
-    "q": "<pre class=\"code-block\">Scaffold(\n    topBar = { TopAppBar(title = { Text(\"App\") }) },\n    floatingActionButton = { FloatingActionButton(onClick = {}) { Text(\"FAB\") } }\n) { innerPadding ->\n    Text(\"Content\", modifier = Modifier.padding(innerPadding))\n}</pre>\nWhich slot places the floating action button?",
+    "q": "<pre class=\"code-block\">1  Scaffold(\n2      topBar = { TopAppBar(title = { Text(\"App\") }) },\n3      floatingActionButton = { FloatingActionButton(onClick = {}) { Text(\"FAB\") } }\n4  ) { innerPadding ->\n5      Text(\"Content\", modifier = Modifier.padding(innerPadding))\n6  }</pre>\nWhich slot places the floating action button?",
     "options": [
       "topBar",
       "floatingActionButton",
@@ -231,10 +231,10 @@
       "drawerContent"
     ],
     "correct": 1,
-    "why": "Scaffold provides specific slots like topBar, bottomBar and floatingActionButton; the FAB is provided via the floatingActionButton slot."
+    "why": "[Line 3] uses the floatingActionButton parameter to provide a FloatingActionButton. Scaffold provides specific named slots: topBar ([line 2]), floatingActionButton ([line 3]), and content ([lines 4-5])."
   },
   {
-    "q": "<pre class=\"code-block\">navController.navigate(\"profile\")\nnavController.navigate(\"settings\")\nnavController.popBackStack()</pre>\nAfter executing these calls, where does the user end up?",
+    "q": "<pre class=\"code-block\">1  navController.navigate(\"profile\")\n2  navController.navigate(\"settings\")\n3  navController.popBackStack()</pre>\nAfter executing these calls, where does the user end up?",
     "options": [
       "Still on Settings",
       "Back on Profile",
@@ -242,10 +242,10 @@
       "The entire stack is cleared"
     ],
     "correct": 1,
-    "why": "popBackStack() without parameters removes the top destination (settings) and returns to the previous destination (profile)."
+    "why": "[Line 1] navigates to profile, [line 2] navigates to settings (stack now has profile -> settings). [Line 3] calls popBackStack() which removes the top destination (settings), returning to profile."
   },
   {
-    "q": "<pre class=\"code-block\">class CounterViewModel : ViewModel() {\n    var count by mutableStateOf(0)\n}</pre>\nWhich statement about this ViewModel is true?",
+    "q": "<pre class=\"code-block\">1  class CounterViewModel : ViewModel() {\n2      var count by mutableStateOf(0)\n3  }</pre>\nWhich statement about this ViewModel is true?",
     "options": [
       "The count persists across configuration changes",
       "The count resets on every recomposition",
@@ -253,10 +253,10 @@
       "mutableStateOf is unnecessary"
     ],
     "correct": 0,
-    "why": "A ViewModel survives configuration changes; the mutableStateOf value persists as long as the ViewModel exists."
+    "why": "[Line 1] declares a ViewModel which survives configuration changes like screen rotation. [Line 2] uses mutableStateOf to hold observable state. The count persists as long as the ViewModel exists."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun RememberDemo() {\n    var text by remember { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nWhat happens to the text when the device rotates?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun RememberDemo() {\n3      var text by remember { mutableStateOf(\"\") }\n4      TextField(value = text, onValueChange = { text = it })\n5  }</pre>\nWhat happens to the text when the device rotates?",
     "options": [
       "The text resets to empty",
       "The text persists",
@@ -264,10 +264,10 @@
       "The text duplicates"
     ],
     "correct": 0,
-    "why": "remember does not persist state across configuration changes; the value resets on rotation."
+    "why": "[Line 3] uses remember, which only persists state across recompositions, not configuration changes like rotation. The entire activity is recreated on rotation, so text resets to empty string."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun RememberSaveableDemo() {\n    var text by rememberSaveable { mutableStateOf(\"\") }\n    TextField(value = text, onValueChange = { text = it })\n}</pre>\nHow does this behave across a device rotation?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun RememberSaveableDemo() {\n3      var text by rememberSaveable { mutableStateOf(\"\") }\n4      TextField(value = text, onValueChange = { text = it })\n5  }</pre>\nHow does this behave across a device rotation?",
     "options": [
       "The text is lost",
       "The text persists",
@@ -275,10 +275,10 @@
       "The state is saved only if text is numeric"
     ],
     "correct": 1,
-    "why": "rememberSaveable persists the state using SavedInstanceState; after rotation the text remains."
+    "why": "[Line 3] uses rememberSaveable which saves state to the SavedInstanceState bundle. Unlike remember, rememberSaveable persists across configuration changes like rotation, so the text remains after rotation."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun ToggleExample() {\n    var enabled by remember { mutableStateOf(true) }\n    Switch(checked = enabled, onCheckedChange = { enabled = it })\n}</pre>\nWhat happens when the user toggles the switch?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun ToggleExample() {\n3      var enabled by remember { mutableStateOf(true) }\n4      Switch(checked = enabled, onCheckedChange = { enabled = it })\n5  }</pre>\nWhat happens when the user toggles the switch?",
     "options": [
       "The enabled value updates and the UI reflects the change",
       "Nothing happens",
@@ -286,10 +286,10 @@
       "The app crashes"
     ],
     "correct": 0,
-    "why": "Switch updates the mutableStateOf value and triggers recomposition; the UI shows the new state."
+    "why": "[Line 3] uses remember with mutableStateOf to track enabled state. [Line 4] binds the Switch to this state. When toggled, onCheckedChange updates enabled ([line 4]), triggering recomposition and updating the UI."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun StatelessToggle(enabled: Boolean, onToggle: (Boolean) -> Unit) {\n    Switch(checked = enabled, onCheckedChange = onToggle)\n}\n@Composable\nfun Parent() {\n    var enabled by remember { mutableStateOf(false) }\n    StatelessToggle(enabled = enabled, onToggle = { enabled = it })\n}</pre>\nWhat pattern does this illustrate?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun StatelessToggle(enabled: Boolean, onToggle: (Boolean) -> Unit) {\n3      Switch(checked = enabled, onCheckedChange = onToggle)\n4  }\n5  @Composable\n6  fun Parent() {\n7      var enabled by remember { mutableStateOf(false) }\n8      StatelessToggle(enabled = enabled, onToggle = { enabled = it })\n9  }</pre>\nWhat pattern does this illustrate?",
     "options": [
       "State hoisting",
       "Two‑way data binding",
@@ -297,7 +297,7 @@
       "Global mutable state"
     ],
     "correct": 0,
-    "why": "Moving state to the parent composable and passing it down with callbacks is an example of state hoisting."
+    "why": "[Lines 2-4] define a stateless component that receives state as parameters. [Line 7] holds the state in the parent. [Line 8] passes state down and callbacks up. This is state hoisting - moving state to a common ancestor."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

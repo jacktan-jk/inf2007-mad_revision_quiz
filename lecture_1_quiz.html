@@ -476,7 +476,7 @@
     "why": "The `let` scope function performs an operation on a nullable object only when it is non‑null and returns the result."
   },
   {
-    "q": "<pre class=\"code-block\">fun main() {\n    var x = 5\n    x = x * 2\n    val y = x\n    println(y)\n}</pre>\nWhat will be printed when this Kotlin program runs?",
+    "q": "<pre class=\"code-block\">1  fun main() {\n2      var x = 5\n3      x = x * 2\n4      val y = x\n5      println(y)\n6  }</pre>\nWhat will be printed when this Kotlin program runs?",
     "options": [
       "5",
       "10",
@@ -484,10 +484,10 @@
       "It will throw a reassignment error"
     ],
     "correct": 1,
-    "why": "A `var` can be reassigned while a `val` is initialized only once. In this program x becomes 10, y is assigned that value and printed, so the output is 10."
+    "why": "[Line 2] declares var x = 5. [Line 3] reassigns x to x * 2 (which is 10). [Line 4] assigns this value to val y. [Line 5] prints y, so the output is 10."
   },
   {
-    "q": "<pre class=\"code-block\">fun greet(name: String) {\n    println(name.length)\n}\nfun main() {\n    val nullableName: String? = null\n    greet(nullableName)\n}</pre>\nWhat happens when compiling this Kotlin program?",
+    "q": "<pre class=\"code-block\">1  fun greet(name: String) {\n2      println(name.length)\n3  }\n4  fun main() {\n5      val nullableName: String? = null\n6      greet(nullableName)\n7  }</pre>\nWhat happens when compiling this Kotlin program?",
     "options": [
       "It fails to compile because greet() expects a non‑null String",
       "It prints 0",
@@ -495,7 +495,7 @@
       "It throws a NullPointerException at runtime"
     ],
     "correct": 0,
-    "why": "Kotlin's type system forbids passing a nullable `String?` to a function expecting a non‑nullable parameter, so the compiler reports a type mismatch."
+    "why": "[Line 1] declares greet() expecting a non-nullable String parameter. [Line 5] creates a nullable String? set to null. [Line 6] attempts to pass nullableName to greet(), but Kotlin's type system forbids passing a nullable String? to a function expecting non-null, causing a compilation error."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

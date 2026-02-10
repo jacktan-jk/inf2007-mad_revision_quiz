@@ -300,7 +300,7 @@
     "why": "The slides note that rememberSaveable works well for primitives but fails on complex logic or navigation, which should be managed by a ViewModel."
   },
   {
-    "q": "<pre class=\"code-block\">navController.navigate(\"details\")\nnavController.navigate(\"profile\")\nnavController.popBackStack(\"details\", inclusive = true)</pre>\nWhat will be the resulting back stack?",
+    "q": "<pre class=\"code-block\">1  navController.navigate(\"details\")\n2  navController.navigate(\"profile\")\n3  navController.popBackStack(\"details\", inclusive = true)</pre>\nWhat will be the resulting back stack?",
     "options": [
       "The user is navigated to HomeScreen and the entire back stack is cleared",
       "The Details screen is removed and Profile becomes the top destination",
@@ -308,7 +308,7 @@
       "The Details and Profile screens are removed, leaving only HomeScreen"
     ],
     "correct": 3,
-    "why": "popBackStack(\"details\", inclusive = true) removes entries up to and including the \"details\" destination. Since the stack was [Home, details, profile], both profile and details are removed, leaving Home on top."
+    "why": "[Line 1] navigates to details, [line 2] navigates to profile (stack: [Home, details, profile]). [Line 3] calls popBackStack with inclusive = true, which removes all entries up to and including \"details\". This removes both profile and details, leaving only Home on top."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

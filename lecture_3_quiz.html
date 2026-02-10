@@ -333,7 +333,7 @@
     "why": "During recomposition, Compose tracks which composables were invoked and skips recomposing those whose inputs haven't changed."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun Counter() {\n    var count by remember { mutableStateOf(1) }\n    Button(onClick = { count++ }) {\n        Text(\"Count: $count\")\n    }\n}</pre>\nIf the user clicks the button twice, what text appears on the button?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun Counter() {\n3      var count by remember { mutableStateOf(1) }\n4      Button(onClick = { count++ }) {\n5          Text(\"Count: $count\")\n6      }\n7  }</pre>\nIf the user clicks the button twice, what text appears on the button?",
     "options": [
       "Count: 1",
       "Count: 2",
@@ -341,7 +341,7 @@
       "Count: 0"
     ],
     "correct": 2,
-    "why": "The initial value of count is 1. Each click increments count by 1, so after two clicks the value is 3 and the button displays \"Count: 3\"."
+    "why": "[Line 3] initializes count to 1 using remember with mutableStateOf. [Line 4] increments count on each click. Starting at 1, after two clicks count becomes 3, so [line 5] displays \"Count: 3\"."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

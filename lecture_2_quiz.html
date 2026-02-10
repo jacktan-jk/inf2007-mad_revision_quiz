@@ -388,7 +388,7 @@
     "why": "Threads share a process's virtual address space and resources, whereas processes have separate memory spaces."
   },
   {
-    "q": "<pre class=\"code-block\">val intent = Intent(this, DetailActivity::class.java)\nstartActivity(intent)</pre>\nWhat does this Kotlin code accomplish in an Android Activity?",
+    "q": "<pre class=\"code-block\">1  val intent = Intent(this, DetailActivity::class.java)\n2  startActivity(intent)</pre>\nWhat does this Kotlin code accomplish in an Android Activity?",
     "options": [
       "It explicitly sends a broadcast to the system",
       "It starts the DetailActivity screen",
@@ -396,7 +396,7 @@
       "It creates a ContentProvider instance"
     ],
     "correct": 1,
-    "why": "An explicit Intent constructed with a context and a target class launches the specified Activity when passed to startActivity(). This starts DetailActivity."
+    "why": "[Line 1] creates an explicit Intent with this context and DetailActivity as the target class. [Line 2] calls startActivity() which launches DetailActivity."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---

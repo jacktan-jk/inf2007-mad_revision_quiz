@@ -322,7 +322,7 @@
     "why": "Hoisting state to the parent makes a composable more reusable and testable because it no longer owns its own state."
   },
   {
-    "q": "<pre class=\"code-block\">@Composable\nfun ParentScreen() {\n    var counter by rememberSaveable { mutableStateOf(0) }\n    Column {\n        CounterComponent(counter, { counter = it })\n        Text(\"Parent Counter: $counter\")\n    }\n}\n@Composable\nfun CounterComponent(counter: Int, onCounterChange: (Int) -> Unit) {\n    Button(onClick = { onCounterChange(counter + 1) }) {\n        Text(\"Increment: $counter\")\n    }\n}</pre>\nIf the user clicks the Increment button three times, what will be displayed?",
+    "q": "<pre class=\"code-block\">1  @Composable\n2  fun ParentScreen() {\n3      var counter by rememberSaveable { mutableStateOf(0) }\n4      Column {\n5          CounterComponent(counter, { counter = it })\n6          Text(\"Parent Counter: $counter\")\n7      }\n8  }\n9  @Composable\n10 fun CounterComponent(counter: Int, onCounterChange: (Int) -> Unit) {\n11     Button(onClick = { onCounterChange(counter + 1) }) {\n12         Text(\"Increment: $counter\")\n13     }\n14 }</pre>\nIf the user clicks the Increment button three times, what will be displayed?",
     "options": [
       "Increment: 0, Parent Counter: 3",
       "Increment: 3, Parent Counter: 0",
@@ -330,7 +330,7 @@
       "Increment: 0, Parent Counter: 0"
     ],
     "correct": 2,
-    "why": "Clicking the button calls onCounterChange with the incremented value, updating the state in ParentScreen. After three clicks both counter and the argument passed to CounterComponent are 3, so both texts show 3."
+    "why": "[Line 3] initializes counter to 0 in ParentScreen. [Line 11] calls onCounterChange(counter + 1) on each click. [Line 5] updates counter with the new value. After three clicks, counter = 3, so [line 6] shows \"Parent Counter: 3\" and [line 12] shows \"Increment: 3\"."
   }
 ];
     // --- Quiz Logic (DO NOT MODIFY) ---
